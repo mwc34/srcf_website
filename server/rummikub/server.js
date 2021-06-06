@@ -432,10 +432,10 @@ function connection(socket) {
         let source_pos = [null, null]
         
         if (from_hand) {
-            // Reject if using joker before value_remaining
-            if ((p.hand.value_remaining > 0 || (p.hand.value_remaining != null && !valid_board)) && source_tiles.map(x => p.hand.tiles[x[1]][1]).includes(-1)) {
-                return
-            }
+            // // Reject if using joker before value_remaining
+            // if ((p.hand.value_remaining > 0 || (p.hand.value_remaining != null && !valid_board)) && source_tiles.map(x => p.hand.tiles[x[1]][1]).includes(-1)) {
+                // return
+            // }
             
             
             
