@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-image: url("https://pbs.twimg.com/media/DsN6CaeU4AAuMQZ.jpg:large");
+    background-size: cover;
+    font-family: Arial;
+}
+
+#playerWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 25%;
+    height: 100%;
+    left: 5%;
+    position: absolute;
+}
+
+.player {
+    background-color: rgba(200, 200, 200, 0.7);
+    border: solid black 1px;
+    width: 100%;
+    margin: 2vh;
+    font-size: 4vh;
+    border-radius: 1vh;
+    overflow: hidden;
+}
+
+.playerName {
+    padding: 1vh;
+}
+
+.playerScore {
+    padding: 1vh;
+}
+
+#gameWrapper {
+    width: 60%;
+    height: 50%;
+    position: absolute;
+    top: 25%;
+    left: 35%;
+    border: black solid 1px;
+    border-radius: 1vh;
+    background-color: rgba(200, 200, 200, 0.7);
+}
+
+#gameQuestion {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    top: 0%;
+    left: 0%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10vh;
+}
+
+#gameAnswers {
+    width: 100%;
+    height: 50%;
+    top: 50%;
+    left: 0%;
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.answer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh;
+    margin: 1vh;
+    border: black solid 1px;
+    border-radius: 1vh;
+    font-size: 4vh;
+    
+}
+
+.answerImage {
+    width: 12vh;
+    height: 12vh;
+}
+
+.answerText {
+    user-select: none;
+    height: 12vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.incorrect {
+    background-color: darkred !important;
+}
+
+.correct {
+    background-color: darkgreen !important;
+}
+
+.activePlayer {
+    color: darkblue !important;
+}

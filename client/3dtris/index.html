@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link href="style.css" type="text/css" rel="stylesheet"></link>
+        <title>
+            3D Tetris
+        </title>
+        <meta charset="UTF-8">
+    </head>
+
+
+    <body>
+
+        <div id="newGame" onclick="newGame()">
+            New Game
+        </div>
+        
+        <div id="joinGame" onclick="joinGame()">
+            Join Game
+        </div>
+        
+        <div id="linesCounter" class="lines">
+            Lines: 0
+        </div>
+        
+        <div id="otherLinesCounter" class="lines">
+            Lines: 0
+        </div>
+        
+        <canvas id="gameCanvas" class="canvas">
+        </canvas>
+        
+        <canvas id="otherGameCanvas" class="canvas">
+        </canvas>
+
+        <div id="sideView">
+        </div>
+        
+        <canvas id="nextShape">
+        </canvas>
+    
+        <script src="scripts/init.js">
+        </script>
+    
+    </body>
+    
+</html>

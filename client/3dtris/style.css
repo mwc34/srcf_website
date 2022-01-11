@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+#joinGame {
+    position: absolute;
+    top: 5vh;
+    left: 0vh;
+    width: 20vh;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: black solid 1px;
+}
+
+.canvas {
+    position: absolute;
+    top: 5vh;
+    width: 80vh;
+    height: 80vh;
+    border: black solid 1px;
+}
+
+#gameCanvas {
+    left: 20vh;
+}
+
+#otherGameCanvas {
+    left: 100vh;
+    visibility: hidden;
+}
+
+#newGame {
+    position: absolute;
+    top: 0vh;
+    left: 0vh;
+    width: 20vh;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.lines {
+    position: absolute;
+    top: 0vh;
+    width: 80vh;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    border: black solid 1px;
+}
+
+#linesCounter {
+    left: 20vh;
+}
+
+#otherLinesCounter {
+    left: 100vh;
+    visibility: hidden;
+}
+
+#sideView {
+    position: absolute;
+    top: 30vh;
+    left: 0vh;
+    width: 20vh;
+    height: 55vh;
+    border: black solid 1px;
+}
+
+#nextShape {
+    position: absolute;
+    top: 10vh;
+    left: 0vh;
+    width: 20vh;
+    height: 20vh;
+    border: black solid 1px;
+}
