@@ -53,7 +53,7 @@ const questionInfo = {
 const possibleKeys = ['key', 'url', 'name'];
 const players = [];
 const answers = JSON.parse(fs.readFileSync(
-    '/home/mwc34/server/lol_ability_quiz/abilities.json', 
+    './lol_ability_quiz/abilities.json', 
     'utf8'
 ));
 const preload_urls = [];
