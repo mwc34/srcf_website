@@ -230,12 +230,8 @@ addEventListener("load", () => {
 window.addEventListener("resize", () => {
 	if (window.innerWidth != currentWidth || window.innerHeight != currentHeight) {
 		setSize();
-		bodyWrapper.scrollTop = 0;
+		saveSize();
 	}
-	else {
-		bodyWrapper.scrollTop = bodyWrapper.scrollHeight;
-	}
-	saveSize();
 });
 
 const bodyWrapper = document.getElementById("bodyWrapper");
@@ -253,7 +249,7 @@ for (let i=0; i<5; i++) {
 	}
 }
 var socket = null;
-const local = true;
+const local = false;
 
 if (local) {
 	resetNumbers(startingValues[0]);
