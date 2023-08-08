@@ -95,7 +95,7 @@ function clickOperation(idx) {
 
 function getActiveSection() {
 	for (let i=0; i<sectionWrapper.childElementCount; i++) {
-		if (sectionWrapper.children[i].classList.contains("activeOption")) {
+		if (sectionWrapper.children[i].classList.contains("activeSection")) {
 			return i;
 		}
 	}
@@ -123,10 +123,10 @@ function getActiveOperation() {
 
 function setSection(idx, val) {
 	if (val) {
-		sectionWrapper.children[idx].classList.add("activeOption");
+		sectionWrapper.children[idx].classList.add("activeSection");
 	}
 	else {
-		sectionWrapper.children[idx].classList.remove("activeOption");
+		sectionWrapper.children[idx].classList.remove("activeSection");
 	}
 }
 
@@ -196,7 +196,9 @@ function hideSectionSolved(next_puzzle) {
 	sectionSolved.style.visibility = "hidden";
 	if (next_puzzle) {
 		let activeSection = getActiveSection();
-		clickSection((activeSection+1)%5);
+		if (activeSection < 4) {
+			clickSection(activeSection+1);
+		}
 	}
 }
 
@@ -251,7 +253,7 @@ for (let i=0; i<5; i++) {
 	}
 }
 var socket = null;
-const local = false;
+const local = true;
 
 if (local) {
 	resetNumbers(startingValues[0]);
