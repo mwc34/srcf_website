@@ -6,7 +6,7 @@ function clickSection(idx) {
 		setSection(idx, 1);
 		target.innerHTML = sectionWrapper.children[idx].innerHTML;
 		resetNumbers(startingValues[idx]);
-		hideSectionSolved();
+		hideSectionSolved(false);
 
 		for (let h of operationHistory[idx]) {
 			performOperation(h[0][1], h[1][1], h[2]);
@@ -34,16 +34,23 @@ function clickNumber(idx) {
 				setOperation(activeOp, 0);
 			}
 			else {
-				sectionWrapper.children[activeSection].classList.remove("solvedSection");
-				setNumber(idx, 0);
-				setOperation(activeOp, 0);
-				operationHistory[activeSection].push([
+				let move = [
 					[numberCircles[activeNumber].innerHTML, activeNumber], 
 					[numberCircles[idx].innerHTML, idx], 
 					activeOp
-				]);
-				performOperation(activeNumber, idx, activeOp);
-				checkWin();
+				];
+				
+				let valid = performOperation(activeNumber, idx, activeOp);
+				if (valid) {
+					sectionWrapper.children[activeSection].classList.remove("solvedSection");
+					setOperation(activeOp, 0);
+					operationHistory[activeSection].push(move);
+					checkWin();
+				}
+				else {
+					setNumber(activeNumber, 1);
+				}
+				setNumber(idx, 0);
 			}
 		}
 	}
@@ -142,10 +149,17 @@ function setOperation(idx, val) {
 }
 
 function performOperation(a_idx, b_idx, op_idx) {
-	numberCircles[a_idx].style.visibility = "hidden";
+	
 	let a = parseInt(numberCircles[a_idx].innerHTML);
 	let b = parseInt(numberCircles[b_idx].innerHTML);
-	numberCircles[b_idx].innerHTML = calculateOperation(a, b, op_idx);
+	let answer = calculateOperation(a, b, op_idx);
+	if (answer == parseInt(answer)) {
+		numberCircles[b_idx].innerHTML = answer;
+		numberCircles[a_idx].style.visibility = "hidden";
+		return true
+	}
+	return false
+	
 }
 
 function calculateOperation(a, b, opNum) {
@@ -178,9 +192,49 @@ function resetNumbers(values) {
 	}
 }
 
-function hideSectionSolved() {
+function hideSectionSolved(next_puzzle) {
 	sectionSolved.style.visibility = "hidden";
+	if (next_puzzle) {
+		let activeSection = getActiveSection();
+		clickSection((activeSection+1)%5);
+	}
 }
+
+function getDateString() {
+	let d = new Date();
+	return `${d.getUTCDate()}-${d.getUTCMonth()+1}-${d.getUTCFullYear()}`;
+}
+
+var currentWidth = 0;
+var currentHeight = 0;
+
+function setSize() {
+	bodyWrapper.style.width = window.innerWidth + 'px';
+	bodyWrapper.style.height = window.innerHeight + 'px';
+}
+
+function saveSize() {
+	currentWidth = window.innerWidth;
+	currentHeight = window.innerHeight;
+}
+
+// Set the global orientation variable as soon as the page loads
+addEventListener("load", () => {
+	setSize();
+	saveSize();
+})
+
+// Adjust viewport values only if width/height change
+window.addEventListener("resize", () => {
+	if (window.innerWidth != currentWidth || window.innerHeight != currentHeight) {
+		setSize();
+		bodyWrapper.scrollTop = 0;
+	}
+	else {
+		bodyWrapper.scrollTop = bodyWrapper.scrollHeight;
+	}
+	saveSize();
+});
 
 const bodyWrapper = document.getElementById("bodyWrapper");
 const sectionWrapper = document.getElementById("sectionWrapper");
@@ -189,31 +243,38 @@ const numberCircles = document.getElementsByClassName("number");
 const operationCircles = document.getElementsByClassName("operation");
 const sectionSolved = document.getElementById("sectionSolved");
 const operationHistory = [[], [], [], [], []];
-const socket = io({autoConnect: false})
-
-
+const dateString = getDateString();
 var startingValues = [[], [], [], [], []];
 for (let i=0; i<5; i++) {
 	for (let j=0; j<6; j++) {
 		startingValues[i].push(i*6 + j + 1);
 	}
 }
+var socket = null;
+const local = false;
 
-
-socket.on('connect', () => {
-    socket.emit('init', 'digits')
-    socket.emit('starting values', "1234")
-})
-
-socket.on('starting values', (values) => {
-	let numbers = [];
-	for (let i=0; i<values.length; i++) {
-		sectionWrapper.children[i].innerHTML = values[i]["target"];
-		numbers.push(values[i]["numbers"]);
-	}
-	startingValues = numbers;
+if (local) {
 	resetNumbers(startingValues[0]);
-})
+	target.innerHTML = sectionWrapper.children[0].innerHTML;
+}
+else {
+	socket = io({autoConnect: false})
+	socket.on('connect', () => {
+		socket.emit('init', 'digits');
+		socket.emit('starting values', dateString);
+	})
+
+	socket.on('starting values', (values) => {
+		let numbers = [];
+		for (let i=0; i<values.length; i++) {
+			sectionWrapper.children[i].innerHTML = values[i]["target"];
+			numbers.push(values[i]["numbers"]);
+		}
+		startingValues = numbers;
+		resetNumbers(startingValues[0]);
+		target.innerHTML = sectionWrapper.children[0].innerHTML;
+	})
+}
 
 function main() {
 	socket.connect();

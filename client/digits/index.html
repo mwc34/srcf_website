@@ -10,14 +10,14 @@
     <body>
 	<div id="bodyWrapper">
 		<div id="sectionWrapper">
-			<div class="section activeOption" onclick="clickSection(0)"></div>
-			<div class="section" onclick="clickSection(1)"></div>
-			<div class="section" onclick="clickSection(2)"></div>
-			<div class="section" onclick="clickSection(3)"></div>
-			<div class="section" onclick="clickSection(4)"></div>
+			<div class="section activeOption" onclick="clickSection(0)">1</div>
+			<div class="section" onclick="clickSection(1)">2</div>
+			<div class="section" onclick="clickSection(2)">3</div>
+			<div class="section" onclick="clickSection(3)">4</div>
+			<div class="section" onclick="clickSection(4)">5</div>
 		</div>
-		<div id="target">55</div>
-		<!-- <div id="mainWrapper"> -->
+		<div id="target">Target</div>
+		<div id="mainWrapper">
 			<div id="numberWrapper">
 				<div class="circle number" onclick="clickNumber(0)"></div>
 				<div class="circle number" onclick="clickNumber(1)"></div>
@@ -28,7 +28,7 @@
 				<div class="circle number" onclick="clickNumber(4)"></div>
 				<div class="circle number" onclick="clickNumber(5)"></div>
 			</div>
-		<!-- </div> -->
+		</div>
 		<div id="operationWrapper">
 			<div class="circle operation" onclick="clickOperation(0)">&#8634;</div>
 			<div class="circle operation" onclick="clickOperation(1)">+</div>
@@ -36,7 +36,7 @@
 			<div class="circle operation" onclick="clickOperation(3)">×</div>
 			<div class="circle operation" onclick="clickOperation(4)">÷</div>
 		</div>
-		<div id="sectionSolved" style="visibility: hidden;" onclick="hideSectionSolved()">You've done it!</div>
+		<div id="sectionSolved" style="visibility: hidden;" onclick="hideSectionSolved(true)">You've done it!</div>
 	</div>
     </body>
     

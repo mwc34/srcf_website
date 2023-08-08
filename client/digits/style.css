@@ -88,6 +88,7 @@ body {
 .operation {
 	color: white;
 	background-color: black;
+	max-height: 15vh;
 }
 
 #target {
