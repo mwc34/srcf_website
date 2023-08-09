@@ -2,7 +2,9 @@ function clickSection(idx) {
 	let activeSection = getActiveSection();
 	
 	if (idx != activeSection) {
-		setSection(activeSection, 0);
+		if (activeSection != -1) {
+			setSection(activeSection, 0);
+		}
 		setSection(idx, 1);
 		target.innerHTML = sectionWrapper.children[idx].innerHTML;
 		resetNumbers(startingValues[idx]);
@@ -45,6 +47,7 @@ function clickNumber(idx) {
 					sectionWrapper.children[activeSection].classList.remove("solvedSection");
 					setOperation(activeOp, 0);
 					operationHistory[activeSection].push(move);
+					saveHistory();
 					checkWin();
 				}
 				else {
@@ -79,6 +82,7 @@ function clickOperation(idx) {
 			setNumber(last_op[0][1], 1);
 			
 			numberCircles[last_op[1][1]].innerHTML = last_op[1][0];
+			saveHistory();
 			checkWin();
 		}
 	}
@@ -175,14 +179,17 @@ function calculateOperation(a, b, opNum) {
 	}
 }
 
-function checkWin() {
+function checkWin(only_bool=false) {
 	for (let i=0; i<numberCircles.length; i++) {
 		if (numberCircles[i].innerHTML == target.innerHTML && numberCircles[i].style.visibility == "") {
-			sectionSolved.style.visibility = "";
-			sectionWrapper.children[getActiveSection()].classList.add("solvedSection");
-			break;
+			if (!only_bool) {
+				sectionSolved.style.visibility = "";
+				sectionWrapper.children[getActiveSection()].classList.add("solvedSection");
+			}
+			return true;
 		}
 	}
+	return false;
 }
 
 function resetNumbers(values) {
@@ -205,6 +212,27 @@ function hideSectionSolved(next_puzzle) {
 function getDateString() {
 	let d = new Date();
 	return `${d.getUTCDate()}-${d.getUTCMonth()+1}-${d.getUTCFullYear()}`;
+}
+
+function saveHistory() {
+	let activeSection = getActiveSection();
+	storedHistory = loadHistory();
+	if (checkWin(true)) {
+		storedHistory[activeSection] = operationHistory[activeSection];
+	}
+	else {
+		storedHistory[activeSection] = [];
+	}
+	localStorage.operationHistory = JSON.stringify(storedHistory);
+}
+
+function loadHistory() {
+	if (localStorage.operationHistory) {
+		return JSON.parse(localStorage.operationHistory);
+	}
+	else {
+		return [[], [], [], [], []];
+	}
 }
 
 var currentWidth = 0;
@@ -240,7 +268,7 @@ const target = document.getElementById("target");
 const numberCircles = document.getElementsByClassName("number");
 const operationCircles = document.getElementsByClassName("operation");
 const sectionSolved = document.getElementById("sectionSolved");
-const operationHistory = [[], [], [], [], []];
+var operationHistory = [[], [], [], [], []];
 const dateString = getDateString();
 var startingValues = [[], [], [], [], []];
 for (let i=0; i<5; i++) {
@@ -271,6 +299,17 @@ else {
 		startingValues = numbers;
 		resetNumbers(startingValues[0]);
 		target.innerHTML = sectionWrapper.children[0].innerHTML;
+		operationHistory = loadHistory();
+		for (let i=0; i<5; i++) {
+			clickSection(i);
+			if (checkWin(true)) {
+				sectionWrapper.children[getActiveSection()].classList.add("solvedSection");
+			}
+			else {
+				break;
+			}
+		}
+		
 	})
 }
 
