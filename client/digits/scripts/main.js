@@ -227,12 +227,11 @@ function saveHistory() {
 }
 
 function loadHistory() {
-	if (localStorage.operationHistory) {
-		return JSON.parse(localStorage.operationHistory);
+	if (!(localStorage.historyDate && localStorage.historyDate == dateString && localStorage.operationHistory)) {
+		localStorage.historyDate = dateString;
+		localStorage.operationHistory = JSON.stringify([[], [], [], [], []]);
 	}
-	else {
-		return [[], [], [], [], []];
-	}
+	return JSON.parse(localStorage.operationHistory);
 }
 
 var currentWidth = 0;
