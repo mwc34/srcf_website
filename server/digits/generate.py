@@ -12,8 +12,10 @@ def validate_problem(numbers, target):
         a = new_numbers[i[0]]
         b = new_numbers.pop(i[1])
         
-        results = [a+b, a-b, a*b]
-        if b != 0:
+        results = [a+b, abs(a-b), a*b]
+        if b != 0 and a/b == a//b:
+            results.append(a/b)
+        if a != 0 and b/a == b//a and a != b:
             results.append(a/b)
         for idx, result in enumerate(results):
             move = [a, b, idx]
