@@ -131,3 +131,48 @@ body {
 	user-select: none;
 	font-size: 50vh;
 }
+
+#shareWrapper {
+	position: absolute;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	background-color: #63a873;
+	width: 100%;
+	height: 100%;
+	opacity: 95%;
+	border-color: black;
+	border-style: solid;
+	user-select: none;
+}
+
+#shareText {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	user-select: none;
+	font-size: 6vh;
+}
+
+#shareButtonWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-height: 50vh;
+}
+
+.shareButton {
+	font-size: 7vh;
+	border-color: black;
+	border-style: solid;
+	user-select: none;
+	padding: 1vh 5vh 1vh 5vh;
+	margin: 1vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5vh;
+}

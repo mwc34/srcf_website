@@ -9,7 +9,14 @@
     </head>
     <body>
 	<div id="bodyWrapper">
-		<div id="sectionSolved" style="visibility: hidden;" onclick="hideSectionSolved(true)">&#10004;</div>
+		<div id="sectionSolved" style="visibility: hidden;" onclick="hideSectionSolved()">&#10004;</div>
+		<div id="shareWrapper" style="visibility: hidden;">
+			<div id="shareText"></div>
+			<div id="shareButtonWrapper">
+				<div class="shareButton" onclick="shareToClipboard()">Share</div>
+				<div class="shareButton" onclick="hideShareWrapper()">Close</div>
+			</div>
+		</div>
 		<div id="sectionWrapper">
 			<div class="section" onclick="clickSection(0)">1</div>
 			<div class="section" onclick="clickSection(1)">2</div>

@@ -8,7 +8,6 @@ function clickSection(idx) {
 		setSection(idx, 1);
 		target.innerHTML = sectionWrapper.children[idx].innerHTML;
 		resetNumbers(startingValues[idx]);
-		hideSectionSolved(false);
 
 		for (let h of operationHistory[idx]) {
 			performOperation(h[0][1], h[1][1], h[2]);
@@ -199,14 +198,86 @@ function resetNumbers(values) {
 	}
 }
 
-function hideSectionSolved(next_puzzle) {
-	sectionSolved.style.visibility = "hidden";
-	if (next_puzzle) {
-		let activeSection = getActiveSection();
-		if (activeSection < 4) {
-			clickSection(activeSection+1);
+function getNextIncompletePuzzle(startIdx) {
+	for (let i=0; i<sectionWrapper.childElementCount; i++) {
+		let idx = (startIdx + i) % sectionWrapper.childElementCount;
+		let c = sectionWrapper.children[idx];
+		if (!c.classList.contains("solvedSection")) {
+			return idx;
 		}
 	}
+	return -1;
+}
+
+function hideSectionSolved() {
+	sectionSolved.style.visibility = "hidden";
+	
+	let activeSection = getActiveSection();
+	let nextPuzzle = getNextIncompletePuzzle(activeSection);
+	if (nextPuzzle != -1) {
+		clickSection(nextPuzzle);
+	}
+	else {
+		shareWrapper.style.visibility = "";
+		let operationSymbols = [];
+		for (let i=1; i<5; i++) {
+			operationSymbols.push(operationCircles[i].innerHTML);
+		}
+		let totalOperations = 0;
+		let operationList = "";
+		for (let i=0; i<operationHistory.length; i++) {
+			let h = operationHistory[i];
+			totalOperations += h.length;
+			for (let op of h) {
+				operationList += operationSymbols[op[2]-1];
+			}
+			if (i < operationHistory.length-1) {
+				operationList += "<br>";
+			}
+		}
+		let showText = `Congratulations, you've finished today's digits!<br>You took ${totalOperations} operations.<br>${operationList}`;
+		if (optimalOperationCount[0] > 0) {
+			let optimalOperationString = "";
+			let optimalOperationSum = 0;
+			for (let i=0; i<optimalOperationCount.length; i++) {
+				optimalOperationString += optimalOperationCount[i].toString();
+				optimalOperationSum += optimalOperationCount[i];
+				if (i < optimalOperationCount.length-1) {
+					optimalOperationString += ",";
+				}
+			}
+			showText += `<br>The optimal operations were ${optimalOperationSum}:<br>${optimalOperationString}`;
+		}
+		shareWrapper.children[0].innerHTML = showText;
+	}
+}
+
+function shareToClipboard() {
+	let operationSymbols = [];
+	for (let i=1; i<5; i++) {
+		operationSymbols.push(operationCircles[i].innerHTML);
+	}
+	let totalOperations = 0;
+	let operationList = "";
+	for (let i=0; i<operationHistory.length; i++) {
+		let h = operationHistory[i];
+		totalOperations += h.length;
+		for (let op of h) {
+			operationList += operationSymbols[op[2]-1];
+		}
+		if (i < operationHistory.length-1) {
+			operationList += "\n";
+		}
+	}
+	let copyText = `#Digits ${dateString}\n${totalOperations} operations\n${operationList}`;
+	copyText += "\nhttps://mwc34.user.srcf.net/digits";
+	
+	navigator.clipboard.writeText(copyText);
+	hideShareWrapper();
+}
+
+function hideShareWrapper() {
+	shareWrapper.style.visibility = "hidden";
 }
 
 function getDateString() {
@@ -267,9 +338,11 @@ const target = document.getElementById("target");
 const numberCircles = document.getElementsByClassName("number");
 const operationCircles = document.getElementsByClassName("operation");
 const sectionSolved = document.getElementById("sectionSolved");
+const shareWrapper = document.getElementById("shareWrapper");
 var operationHistory = [[], [], [], [], []];
 const dateString = getDateString();
 var startingValues = [[], [], [], [], []];
+const optimalOperationCount = [1, 1, 1, 1, 1];
 for (let i=0; i<5; i++) {
 	for (let j=0; j<6; j++) {
 		startingValues[i].push(i*6 + j + 1);
@@ -280,7 +353,7 @@ const local = false;
 
 if (local) {
 	resetNumbers(startingValues[0]);
-	target.innerHTML = sectionWrapper.children[0].innerHTML;
+	clickSection(0);
 }
 else {
 	socket = io({autoConnect: false})
@@ -294,10 +367,12 @@ else {
 		for (let i=0; i<values.length; i++) {
 			sectionWrapper.children[i].innerHTML = values[i]["target"];
 			numbers.push(values[i]["numbers"]);
+			if ("optimalOperationCount" in values[i]) {
+				optimalOperationCount[i] = values[i]["optimalOperationCount"];
+			}
 		}
 		startingValues = numbers;
 		resetNumbers(startingValues[0]);
-		target.innerHTML = sectionWrapper.children[0].innerHTML;
 		operationHistory = loadHistory();
 		for (let i=0; i<5; i++) {
 			clickSection(i);
