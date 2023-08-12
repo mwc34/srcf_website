@@ -154,7 +154,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	user-select: none;
-	font-size: 6vh;
+	font-size: 5vh;
 }
 
 #shareButtonWrapper {
@@ -165,7 +165,7 @@ body {
 }
 
 .shareButton {
-	font-size: 7vh;
+	font-size: 5vh;
 	border-color: black;
 	border-style: solid;
 	user-select: none;
