@@ -41,7 +41,7 @@ def validate_problem(numbers, target, find_shortest=False):
     return solution or False
     
     
-def generate_valid_problems(seed):
+def generate_valid_problems(seed, optimal=False):
     gen = np.random.default_rng(seed)
     problems = []
     # Problem 1
@@ -50,10 +50,14 @@ def generate_valid_problems(seed):
         
         numbers = gen.choice(np.arange(1, 10), 4, False).tolist()
         numbers.extend([10, 25])
-        if validate_problem(numbers, target):
+        if solution := validate_problem(numbers, target, optimal):
+            problem = {"numbers": sorted(numbers), "target": target}
+            if optimal:
+                problem["optimalOperationCount"] = len(solution)
+            problems.append(problem)
             break
             
-    problems.append({"numbers": sorted(numbers), "target": target})
+    
     
     # Problem 2
     while True:
@@ -61,10 +65,12 @@ def generate_valid_problems(seed):
         
         numbers = gen.choice(np.arange(1, 10), 4, False).tolist()
         numbers.extend([10, 15])
-        if validate_problem(numbers, target):
+        if solution := validate_problem(numbers, target, optimal):
+            problem = {"numbers": sorted(numbers), "target": target}
+            if optimal:
+                problem["optimalOperationCount"] = len(solution)
+            problems.append(problem)
             break
-            
-    problems.append({"numbers": sorted(numbers), "target": target})
     
     # Problem 3
     while True:
@@ -73,11 +79,13 @@ def generate_valid_problems(seed):
         numbers = gen.choice(np.arange(1, 10), 4, False).tolist()
         numbers.extend(gen.choice(np.arange(11, 15), 1, False).tolist())
         numbers.extend([15])
-        if validate_problem(numbers, target):
+        if solution := validate_problem(numbers, target, optimal):
+            problem = {"numbers": sorted(numbers), "target": target}
+            if optimal:
+                problem["optimalOperationCount"] = len(solution)
+            problems.append(problem)
             break
             
-    problems.append({"numbers": sorted(numbers), "target": target})
-    
     # Problem 4
     while True:
         target = gen.integers(301, 399).item()
@@ -85,11 +93,13 @@ def generate_valid_problems(seed):
         numbers = gen.choice(np.arange(1, 10), 3, False).tolist()
         numbers.extend(gen.choice(np.arange(11, 15), 1).tolist())
         numbers.extend([15, 20])
-        if validate_problem(numbers, target):
+        if solution := validate_problem(numbers, target, optimal):
+            problem = {"numbers": sorted(numbers), "target": target}
+            if optimal:
+                problem["optimalOperationCount"] = len(solution)
+            problems.append(problem)
             break
             
-    problems.append({"numbers": sorted(numbers), "target": target})
-    
     # Problem 5
     while True:
         target = gen.integers(401, 499).item()
@@ -97,16 +107,19 @@ def generate_valid_problems(seed):
         numbers = gen.choice(np.arange(1, 10), 2, False).tolist()
         numbers.extend(gen.choice(np.arange(11, 15), 2, False).tolist())
         numbers.extend([20, 25])
-        if validate_problem(numbers, target):
+        if solution := validate_problem(numbers, target, optimal):
+            problem = {"numbers": sorted(numbers), "target": target}
+            if optimal:
+                problem["optimalOperationCount"] = len(solution)
+            problems.append(problem)
             break
             
-    problems.append({"numbers": sorted(numbers), "target": target})
-    
     return problems
     
 if __name__ == "__main__":
     name = sys.argv[1]
-    p = generate_valid_problems(list(name.encode("utf8")))
+    optimal = bool(int(sys.argv[2]))
+    p = generate_valid_problems(list(name.encode("utf8")), optimal)
     os.makedirs(os.path.join(PATH, "starting_values"), exist_ok=True)
     with open(os.path.join(PATH, "starting_values", name + ".json"), "w") as fp:
         json.dump(p, fp)

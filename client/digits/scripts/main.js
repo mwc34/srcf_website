@@ -184,6 +184,9 @@ function checkWin(only_bool=false) {
 			if (!only_bool) {
 				sectionSolved.style.visibility = "";
 				sectionWrapper.children[getActiveSection()].classList.add("solvedSection");
+				if (getNextIncompletePuzzle() == -1) {
+					socket.emit('reload starting values');
+				}
 			}
 			return true;
 		}
@@ -219,37 +222,41 @@ function hideSectionSolved() {
 	}
 	else {
 		shareWrapper.style.visibility = "";
-		let operationSymbols = [];
-		for (let i=1; i<5; i++) {
-			operationSymbols.push(operationCircles[i].innerHTML);
-		}
-		let totalOperations = 0;
-		let operationList = "";
-		for (let i=0; i<operationHistory.length; i++) {
-			let h = operationHistory[i];
-			totalOperations += h.length;
-			for (let op of h) {
-				operationList += operationSymbols[op[2]-1];
-			}
-			if (i < operationHistory.length-1) {
-				operationList += "<br>";
-			}
-		}
-		let showText = `Congratulations, you've finished today's digits!<br>You took ${totalOperations} operations.<br>${operationList}`;
-		if (optimalOperationCount[0] > 0) {
-			let optimalOperationString = "";
-			let optimalOperationSum = 0;
-			for (let i=0; i<optimalOperationCount.length; i++) {
-				optimalOperationString += optimalOperationCount[i].toString();
-				optimalOperationSum += optimalOperationCount[i];
-				if (i < optimalOperationCount.length-1) {
-					optimalOperationString += ",";
-				}
-			}
-			showText += `<br>The optimal operations were ${optimalOperationSum}:<br>${optimalOperationString}`;
-		}
-		shareWrapper.children[0].innerHTML = showText;
+		setShowText();
 	}
+}
+
+function setShowText() {
+	let operationSymbols = [];
+	for (let i=1; i<5; i++) {
+		operationSymbols.push(operationCircles[i].innerHTML);
+	}
+	let totalOperations = 0;
+	let operationList = "";
+	for (let i=0; i<operationHistory.length; i++) {
+		let h = operationHistory[i];
+		totalOperations += h.length;
+		for (let op of h) {
+			operationList += operationSymbols[op[2]-1];
+		}
+		if (i < operationHistory.length-1) {
+			operationList += "<br>";
+		}
+	}
+	let showText = `Congratulations, you've finished today's digits!<br>You took ${totalOperations} operations.<br>${operationList}`;
+	if (optimalOperationCount[0] > 0) {
+		let optimalOperationString = "";
+		let optimalOperationSum = 0;
+		for (let i=0; i<optimalOperationCount.length; i++) {
+			optimalOperationString += optimalOperationCount[i].toString();
+			optimalOperationSum += optimalOperationCount[i];
+			if (i < optimalOperationCount.length-1) {
+				optimalOperationString += ",";
+			}
+		}
+		showText += `<br>The optimal operations were ${optimalOperationSum}:<br>${optimalOperationString}`;
+	}
+	shareWrapper.children[0].innerHTML = showText;
 }
 
 function shareToClipboard() {
@@ -280,8 +287,11 @@ function hideShareWrapper() {
 	shareWrapper.style.visibility = "hidden";
 }
 
-function getDateString() {
+function getDateString(tomorrow=false) {
 	let d = new Date();
+	if (tomorrow) {
+		d.setDate(d.getDate() + 1);
+	}
 	return `${d.getUTCDate()}-${d.getUTCMonth()+1}-${d.getUTCFullYear()}`;
 }
 
@@ -303,6 +313,21 @@ function loadHistory() {
 		localStorage.operationHistory = JSON.stringify([[], [], [], [], []]);
 	}
 	return JSON.parse(localStorage.operationHistory);
+}
+
+function savePuzzleData(values) {
+	let numbers = [];
+	for (let i=0; i<values.length; i++) {
+		// Save section targets
+		sectionWrapper.children[i].innerHTML = values[i]["target"];
+		numbers.push(values[i]["numbers"]);
+		// Save optimalOperationCount
+		if ("optimalOperationCount" in values[i]) {
+			optimalOperationCount[i] = values[i]["optimalOperationCount"];
+		}
+	}
+	// Save startingValues
+	startingValues = numbers;
 }
 
 var currentWidth = 0;
@@ -341,8 +366,9 @@ const sectionSolved = document.getElementById("sectionSolved");
 const shareWrapper = document.getElementById("shareWrapper");
 var operationHistory = [[], [], [], [], []];
 const dateString = getDateString();
+const tomorrowDateString = getDateString(true);
 var startingValues = [[], [], [], [], []];
-const optimalOperationCount = [1, 1, 1, 1, 1];
+const optimalOperationCount = [0, 0, 0, 0, 0];
 for (let i=0; i<5; i++) {
 	for (let j=0; j<6; j++) {
 		startingValues[i].push(i*6 + j + 1);
@@ -359,19 +385,12 @@ else {
 	socket = io({autoConnect: false})
 	socket.on('connect', () => {
 		socket.emit('init', 'digits');
-		socket.emit('starting values', dateString);
+		socket.emit('starting values', dateString, tomorrowDateString);
 	})
 
 	socket.on('starting values', (values) => {
-		let numbers = [];
-		for (let i=0; i<values.length; i++) {
-			sectionWrapper.children[i].innerHTML = values[i]["target"];
-			numbers.push(values[i]["numbers"]);
-			if ("optimalOperationCount" in values[i]) {
-				optimalOperationCount[i] = values[i]["optimalOperationCount"];
-			}
-		}
-		startingValues = numbers;
+		savePuzzleData(values);
+		
 		resetNumbers(startingValues[0]);
 		operationHistory = loadHistory();
 		for (let i=0; i<5; i++) {
@@ -383,7 +402,11 @@ else {
 				break;
 			}
 		}
-		
+	})
+	
+	socket.on('reload starting values', (values) => {
+		savePuzzleData(values);
+		setShowText();
 	})
 }
 
