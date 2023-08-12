@@ -13,11 +13,11 @@ function file_exists(file_name) {
 	return false;
 }
 
-function send_file(socket, file_name) {
+function send_file(socket, file_name, emit_name) {
 	// Read JSON
 	if (file_exists(file_name)) {
 		starting_values = JSON.parse(fs.readFileSync(file_name, 'utf8'));
-		socket.emit("starting values", starting_values);
+		socket.emit(emit_name, starting_values);
 	}
 }
 
@@ -33,13 +33,13 @@ function connection(socket) {
 			// Generate today's quickly without optimal counts
 			const python = spawn('python3', ['./digits/generate.py', dateString, "0"]);
 			python.on('close', (c) => {
-				send_file(socket, file_name);
+				send_file(socket, file_name, 'starting values');
 				// Generate today's with optimal counts
 				spawn('python3', ['./digits/generate.py', dateString, "1"]);
 			});
 		}
 		else {
-			send_file(socket, file_name);
+			send_file(socket, file_name, 'starting values');
 		}
 		// Generate tomorrow's with optimal counts
 		spawn('python3', ['./digits/generate.py', tomorrowDateString, "1"]);
@@ -47,7 +47,7 @@ function connection(socket) {
 	
 	socket.on('reload starting values', (dateString) => {
 		file_name = "./digits/starting_values/" + dateString + ".json";
-		send_file(socket, file_name);
+		send_file(socket, file_name, 'reload starting values');
 	})
 }
 

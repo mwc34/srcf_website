@@ -185,7 +185,7 @@ function checkWin(only_bool=false) {
 				sectionSolved.style.visibility = "";
 				sectionWrapper.children[getActiveSection()].classList.add("solvedSection");
 				if (getNextIncompletePuzzle() == -1) {
-					socket.emit('reload starting values');
+					socket.emit('reload starting values', dateString);
 				}
 			}
 			return true;
@@ -201,7 +201,7 @@ function resetNumbers(values) {
 	}
 }
 
-function getNextIncompletePuzzle(startIdx) {
+function getNextIncompletePuzzle(startIdx=0) {
 	for (let i=0; i<sectionWrapper.childElementCount; i++) {
 		let idx = (startIdx + i) % sectionWrapper.childElementCount;
 		let c = sectionWrapper.children[idx];
