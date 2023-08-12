@@ -6,29 +6,40 @@ import itertools
 
 PATH = os.path.dirname(__file__)
 
-def validate_problem(numbers, target):
+def validate_problem(numbers, target, find_shortest=False):
+    solution = None
+    # Loop over every pair of numbers
     for i in itertools.combinations(range(len(numbers)), 2):
         new_numbers = list(numbers)
+        # Get a & b, the pair of numbers
         a = new_numbers[i[0]]
         b = new_numbers.pop(i[1])
         
+        # Loop over every valid operation
         results = [a+b, abs(a-b), a*b]
         if b != 0 and a/b == a//b:
             results.append(a/b)
         if a != 0 and b/a == b//a and a != b:
-            results.append(a/b)
+            results.append(b/a)
         for idx, result in enumerate(results):
             move = [a, b, idx]
-            if result == np.nan:
-                return False
-            elif result == target:
+            # If reached target, we're done
+            if result == target:
                 return [move]
             else:
+                # Replace the two numbers with result and recurse
                 new_numbers[i[0]] = result
-                t = validate_problem(new_numbers, target)
+                t = validate_problem(new_numbers, target, find_shortest)
                 if t:
-                    return t + [move]
-    return False
+                    if find_shortest:
+                        # -1 because solution will have [move] in but t will not
+                        if solution is None or len(t) < len(solution)-1:
+                            solution = [move] + t
+                    else:
+                        return [move] + t
+                        
+    return solution or False
+    
     
 def generate_valid_problems(seed):
     gen = np.random.default_rng(seed)
