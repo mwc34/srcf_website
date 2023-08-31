@@ -44,75 +44,46 @@ def validate_problem(numbers, target, find_shortest=False):
 def generate_valid_problems(seed, optimal=False):
     gen = np.random.default_rng(seed)
     problems = []
-    # Problem 1
-    while True:
-        target = gen.integers(51, 75).item()
-        
-        numbers = gen.choice(np.arange(1, 10), 4, False).tolist()
-        numbers.extend([10, 25])
-        if solution := validate_problem(numbers, target, optimal):
-            problem = {"numbers": sorted(numbers), "target": target}
-            if optimal:
-                problem["optimalOperationCount"] = len(solution)
-            problems.append(problem)
-            break
-            
+
+    categories = [
+        {
+            4: [1,2,3,4,5,6,7,8,9],
+            2: [10, 25],
+        }, 
+        {
+            4: [1,2,3,4,5,6,7,8,9],
+            2: [10, 15],
+        },
+        {
+            4: [1,2,3,4,5,6,7,8,9],
+            1: [11, 12, 13, 14],
+            1: [15],
+        },
+        {
+            3: [1,2,3,4,5,6,7,8,9],
+            1: [11, 12, 13, 14],
+            2: [15, 20],
+        },
+        {
+            2: [1,2,3,4,5,6,7,8,9],
+            2: [11, 12, 13, 14],
+            2: [20, 25],
+        }
+    ]
     
-    
-    # Problem 2
-    while True:
-        target = gen.integers(101, 199).item()
-        
-        numbers = gen.choice(np.arange(1, 10), 4, False).tolist()
-        numbers.extend([10, 15])
+    for idx, cat in enumerate(categories):
+        target = gen.integers(50 - 49*bool(idx), 99).item() + idx*100
+
+        numbers = []
+        for key, val in cat.items():
+            numbers.extend(gen.choice(val, key, False).tolist())
+
         if solution := validate_problem(numbers, target, optimal):
             problem = {"numbers": sorted(numbers), "target": target}
             if optimal:
                 problem["optimalOperationCount"] = len(solution)
             problems.append(problem)
-            break
-    
-    # Problem 3
-    while True:
-        target = gen.integers(201, 299).item()
-        
-        numbers = gen.choice(np.arange(1, 10), 4, False).tolist()
-        numbers.extend(gen.choice(np.arange(11, 15), 1, False).tolist())
-        numbers.extend([15])
-        if solution := validate_problem(numbers, target, optimal):
-            problem = {"numbers": sorted(numbers), "target": target}
-            if optimal:
-                problem["optimalOperationCount"] = len(solution)
-            problems.append(problem)
-            break
-            
-    # Problem 4
-    while True:
-        target = gen.integers(301, 399).item()
-        
-        numbers = gen.choice(np.arange(1, 10), 3, False).tolist()
-        numbers.extend(gen.choice(np.arange(11, 15), 1).tolist())
-        numbers.extend([15, 20])
-        if solution := validate_problem(numbers, target, optimal):
-            problem = {"numbers": sorted(numbers), "target": target}
-            if optimal:
-                problem["optimalOperationCount"] = len(solution)
-            problems.append(problem)
-            break
-            
-    # Problem 5
-    while True:
-        target = gen.integers(401, 499).item()
-        
-        numbers = gen.choice(np.arange(1, 10), 2, False).tolist()
-        numbers.extend(gen.choice(np.arange(11, 15), 2, False).tolist())
-        numbers.extend([20, 25])
-        if solution := validate_problem(numbers, target, optimal):
-            problem = {"numbers": sorted(numbers), "target": target}
-            if optimal:
-                problem["optimalOperationCount"] = len(solution)
-            problems.append(problem)
-            break
+            break       
             
     return problems
     
