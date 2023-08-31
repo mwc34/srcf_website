@@ -46,29 +46,29 @@ def generate_valid_problems(seed, optimal=False):
     problems = []
 
     categories = [
-        {
-            4: [1,2,3,4,5,6,7,8,9],
-            2: [10, 25],
-        }, 
-        {
-            4: [1,2,3,4,5,6,7,8,9],
-            2: [10, 15],
-        },
-        {
-            4: [1,2,3,4,5,6,7,8,9],
-            1: [11, 12, 13, 14],
-            1: [15],
-        },
-        {
-            3: [1,2,3,4,5,6,7,8,9],
-            1: [11, 12, 13, 14],
-            2: [15, 20],
-        },
-        {
-            2: [1,2,3,4,5,6,7,8,9],
-            2: [11, 12, 13, 14],
-            2: [20, 25],
-        }
+        [
+            [4, [1,2,3,4,5,6,7,8,9]],
+            [2, [10, 25]],
+        ], 
+        [
+            [4, [1,2,3,4,5,6,7,8,9]],
+            [2, [10, 15]],
+        ],
+        [
+            [4, [1,2,3,4,5,6,7,8,9]],
+            [1, [11, 12, 13, 14]],
+            [1, [15]],
+        ],
+        [
+            [3, [1,2,3,4,5,6,7,8,9]],
+            [1, [11, 12, 13, 14]],
+            [2, [15, 20]],
+        ],
+        [
+            [2, [1,2,3,4,5,6,7,8,9]],
+            [2, [11, 12, 13, 14]],
+            [2, [20, 25]],
+        ]
     ]
     
     for idx, cat in enumerate(categories):
@@ -76,7 +76,7 @@ def generate_valid_problems(seed, optimal=False):
             target = gen.integers(50 - 49*bool(idx), 99).item() + idx*100
     
             numbers = []
-            for key, val in cat.items():
+            for key, val in cat:
                 numbers.extend(gen.choice(val, key, False).tolist())
     
             if solution := validate_problem(numbers, target, optimal):
