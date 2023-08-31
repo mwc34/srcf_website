@@ -72,18 +72,19 @@ def generate_valid_problems(seed, optimal=False):
     ]
     
     for idx, cat in enumerate(categories):
-        target = gen.integers(50 - 49*bool(idx), 99).item() + idx*100
-
-        numbers = []
-        for key, val in cat.items():
-            numbers.extend(gen.choice(val, key, False).tolist())
-
-        if solution := validate_problem(numbers, target, optimal):
-            problem = {"numbers": sorted(numbers), "target": target}
-            if optimal:
-                problem["optimalOperationCount"] = len(solution)
-            problems.append(problem)
-            break       
+        while True:
+            target = gen.integers(50 - 49*bool(idx), 99).item() + idx*100
+    
+            numbers = []
+            for key, val in cat.items():
+                numbers.extend(gen.choice(val, key, False).tolist())
+    
+            if solution := validate_problem(numbers, target, optimal):
+                problem = {"numbers": sorted(numbers), "target": target}
+                if optimal:
+                    problem["optimalOperationCount"] = len(solution)
+                problems.append(problem)
+                break       
             
     return problems
     
