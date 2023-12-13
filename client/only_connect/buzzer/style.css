@@ -1,0 +1,46 @@
+* { box-sizing: border-box; }
+body {
+	font-family: Arial;
+	margin: 0;
+}
+
+#bodyWrapper {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow: auto;
+	width: 100vw;
+	height: 100vh;
+	padding: 0.5vw;
+}
+
+#buzzerDiv {
+	display: flex;
+	justify-content: center;
+	flex-grow: 1;
+	width: 100%;
+	max-height: 80vh;
+}
+
+#buzzerImg {
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 1vw;
+}
+
+.infoBox {
+	min-height: 10vh;
+	flex-grow: 1;
+	margin: 0.5vw;
+	font-size: 7vh;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	user-select: none;
+	border-radius: 1vw;
+	border-color: black;
+	border-style: solid;
+	background-color: grey;
+}

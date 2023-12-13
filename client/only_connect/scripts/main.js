@@ -42,6 +42,28 @@ function stopTimer() {
 	updateGame();
 }
 
+function undoBuzzer() {
+	
+}
+
+function revealAnswer(param) {
+	let state = gameState[gameState.shownSection];
+	if (gameState.shownSection == "groups" || gameState.shownSection == "sequences") {
+		if (state.questionType && !gameState.timer.active && !state.answer) {
+			if (param >= 0 && param === state.boxes.length-1) {
+				state.fixedScore = param;
+				let question = gameQuestions[gameState.shownSection][state.questionsDone[state.questionsDone.length-1]];
+				while (state.boxes.length < question.boxes.length) {
+					state.boxes.push(question.boxes[state.boxes.length]);
+				}
+				state.answer = question.answer;
+				gameState.buzzer = null;
+			}
+		}
+	}
+	updateGame();
+}
+
 function goForward(param) {
 	let state = gameState[gameState.shownSection];
 	switch (gameState.shownSection) {
@@ -50,7 +72,7 @@ function goForward(param) {
 			if (state.questionType) {
 				// Next part of question
 				let question = gameQuestions[gameState.shownSection][state.questionsDone[state.questionsDone.length-1]];
-				if (state.boxes.length < 4) {
+				if (state.boxes.length < question.boxes.length) {
 					if (!state.boxes.length) {
 						gameState.timer.time = state.maxTime;
 						gameState.timer.active = true;
@@ -58,6 +80,9 @@ function goForward(param) {
 					}
 					// Next box
 					state.boxes.push(question.boxes[state.boxes.length]);
+					state.fixedScore = null;
+					state.answer = null;
+					gameState.buzzer = null;
 				}
 				else if (!state.answer) {
 					if (!gameState.timer.active) {
@@ -74,17 +99,21 @@ function goForward(param) {
 						state.questionType = null;
 						state.boxes = [];
 						state.answer = null;
+						state.fixedScore = null;
 						gameState.shownSection = null;
 						gameState.timer.active = false;
 						gameState.timer.time = 0;
+						gameState.buzzer = null;
 					}
 					else {
 						// Section menu
 						state.questionType = null;
 						state.boxes = [];
 						state.answer = null;
+						state.fixedScore = null;
 						gameState.timer.active = false;
 						gameState.timer.time = state.maxTime;
+						gameState.buzzer = null;
 					}
 				}
 			}
@@ -96,14 +125,16 @@ function goForward(param) {
 						state.questionType = gameQuestions[gameState.shownSection][param].type;
 						state.boxes = [];
 						state.answer = null;
+						state.fixedScore = null;
+						gameState.timer.active = false;
+						gameState.timer.time = state.maxTime;
+						gameState.buzzer = null;
 					}
 				}
 			}
 			break;
 		case "connections":
-			// Start board or go to next board
-			// Click a tile and either highlight or try a connection
-			// Cycle through answers
+			// Start current board
 			if (state.boxes.completed.length + state.boxes.floating.length < 16) {
 				if (param == null) {
 					// Show the boxes for this board
@@ -175,10 +206,12 @@ function goForward(param) {
 						if (state.done) {
 							// Go back to menu
 							gameState.shownSection = null;
+							gameState.timer.time = 0;
 						}
 					}
 				}
 			}
+			// Click a tile and either highlight or try a connection
 			else if (param != null) {
 				let boxValue = state.boxes.floating[param - state.boxes.completed.length];
 				if (boxValue) {
@@ -220,6 +253,7 @@ function goForward(param) {
 					}
 				}
 			}
+			gameState.buzzer = null;
 			break;
 		case "vowels":
 			// Find the category for the next question
@@ -244,11 +278,13 @@ function goForward(param) {
 				else if (category.questions[i].answer == state.question) {
 					if (i+1 < category.questions.length) {
 						nextQuestion = category.questions[i+1].question;
+						gameState.buzzer = null;
 					}
 					else if (categoryIdx+1 < gameQuestions.vowels.length) {
 						// Next category
 						nextQuestion = null;
 						state.categoryName = gameQuestions.vowels[categoryIdx+1].categoryName;
+						gameState.buzzer = null;
 					}
 					else {
 						// Finished vowels
@@ -256,9 +292,10 @@ function goForward(param) {
 						state.categoryName = null;
 						nextQuestion = null;
 						gameState.shownSection = null;
+						gameState.timer.time = 0;
 						gameState.timer.active = false;
+						gameState.buzzer = null;
 					}
-					state.answer = null;
 					break;
 				}
 			}
@@ -274,7 +311,7 @@ function goForward(param) {
 			// Main menu
 			let keys = ["groups", "sequences", "connections", "vowels"];
 			for (let i=0; i<keys.length; i++) {
-				if (param == keys[i] && !gameState[param].done) {
+				if (param === keys[i] && !gameState[param].done) {
 					// Start this section
 					state = gameState[param];
 					gameState.shownSection = param;
@@ -285,6 +322,7 @@ function goForward(param) {
 							state.questionType = null;
 							state.boxes = [];
 							state.answer = null;
+							state.fixedScore = null;
 							break;
 						case "connections":
 							state.currentBoard = 0;
@@ -299,11 +337,11 @@ function goForward(param) {
 						case "vowels":
 							state.categoryName = gameQuestions.vowels[0].categoryName;
 							state.question = null;
-							state.answer = null;
 							break;
 					}
 					gameState.timer.time = state.maxTime;
 					gameState.timer.active = false;
+					gameState.buzzer = null;
 					break;
 				}
 			}
@@ -356,7 +394,6 @@ function updateScore(score_idx) {
 }
 
 function stopAudio() {
-	console.log(audio.paused, audio.currentTime);
 	if (!audio.paused || audio.currentTime) {
 		audio.pause();
 		audio.src = "";
@@ -412,7 +449,7 @@ function updateGame() {
 			// Groups/Sequences
 			for (let i=0; i<fourBoxBoxWrapper.childElementCount; i++) {
 				let box = fourBoxBoxWrapper.children[i];
-				box.onclick = null;
+				box.onclick = () => {revealAnswer(i)};
 				box.style.opacity = "";
 				if (gameState[section].boxes.length > i) {
 					box.style.visibility = "visible";
@@ -440,7 +477,8 @@ function updateGame() {
 				}
 				
 				let timerBox = fourBoxTimerWrapper.children[i];
-				if (gameState[section].boxes.length == i+1) {
+				let match = gameState[section].fixedScore == null ? gameState[section].boxes.length-1 : gameState[section].fixedScore;
+				if (i == match) {
 					timerBox.style.visibility = "";
 					let percent = 100 * (1 - gameState.timer.time / gameState[section].maxTime);
 					timerBox.style.background = `linear-gradient(90deg, ${TIMER_DONE_COLOUR} ${percent}%, ${TIMER_UNDONE_COLOUR} ${percent}%)`;
@@ -548,8 +586,8 @@ function updateGame() {
 	}
 	
 	// Update the answerBox
-	if (section && gameState[section].answer) {
-		answerBox.innerHTML = gameState[section].answer;
+	if (section && (gameState[section].answer || gameState.buzzer)) {
+		answerBox.innerHTML = gameState[section].answer || gameState.buzzer;
 		answerBox.style.visibility = "visible";
 	}
 	else {
@@ -570,6 +608,7 @@ var gameState = {
 		"time": 0,
 		"active": false,
 	},
+	"buzzer": null,
 	"groups": {
 		"done": false,
 		"maxTime": 40,
@@ -577,6 +616,7 @@ var gameState = {
 		"questionType": null,
 		"boxes": [],
 		"answer": null,
+		"fixedScore": null,
 	},
 	"sequences": {
 		"done": false,
@@ -585,6 +625,7 @@ var gameState = {
 		"questionType": null,
 		"boxes": [],
 		"answer": null,
+		"fixedScore": null,
 	},
 	"connections": {
 		"done": false,
@@ -602,7 +643,6 @@ var gameState = {
 		"done": false,
 		"categoryName": null,
 		"question": null,
-		"answer": null,
 	}
 }
 
