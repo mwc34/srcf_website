@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>
+            Only Connect
+        </title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+	<div id="bodyWrapper">
+		<div id="titleWrapper">
+			<div class="score box" onclick="updateScore(0)">0</div>
+			<div id="titleBox" class="box infoBox" onclick="goForward()">Title Box</div>
+			<div class="score box" onclick="updateScore(1)">0</div>
+		</div>
+		<div id="fourBoxWrapper">
+			<div id="fourBoxTimerWrapper">
+				<div class="box fourBoxTimer">5 Points</div>
+				<div class="box fourBoxTimer">3 Points</div>
+				<div class="box fourBoxTimer">2 Points</div>
+				<div class="box fourBoxTimer">1 Points</div>
+			</div>
+			<div id="fourBoxBoxWrapper">
+				<div class="box fourBox">1</div>
+				<div class="box fourBox">2</div>
+				<div class="box fourBox">3</div>
+				<div class="box fourBox">4</div>
+			</div>
+		</div>
+		<div id="sixBoxWrapper">
+			<div class="sixBoxThreeWrapper">
+				<div class="box threeBox" onclick="goForward(0)">1</div>
+				<div class="box threeBox" onclick="goForward(1)">2</div>
+				<div class="box threeBox" onclick="goForward(2)">3</div>
+			</div>
+			<div class="sixBoxThreeWrapper">
+				<div class="box threeBox" onclick="goForward(3)">4</div>
+				<div class="box threeBox" onclick="goForward(4)">5</div>
+				<div class="box threeBox" onclick="goForward(5)">6</div>
+			</div>
+		</div>
+		<div id="connectionWrapper">
+			<div class="connectionFourWrapper">
+				<div class="box fourBox"  onclick="goForward(0)">1</div>
+				<div class="box fourBox"  onclick="goForward(1)">2</div>
+				<div class="box fourBox"  onclick="goForward(2)">3</div>
+				<div class="box fourBox"  onclick="goForward(3)">4</div>
+			</div>
+			<div class="connectionFourWrapper">
+				<div class="box fourBox"  onclick="goForward(4)">5</div>
+				<div class="box fourBox"  onclick="goForward(5)">6</div>
+				<div class="box fourBox"  onclick="goForward(6)">7</div>
+				<div class="box fourBox"  onclick="goForward(7)">8</div>
+			</div>
+			<div class="connectionFourWrapper">
+				<div class="box fourBox"  onclick="goForward(8)">9</div>
+				<div class="box fourBox"  onclick="goForward(9)">10</div>
+				<div class="box fourBox"  onclick="goForward(10)">11</div>
+				<div class="box fourBox"  onclick="goForward(11)">12</div>
+			</div>
+			<div class="connectionFourWrapper">
+				<div class="box fourBox"  onclick="goForward(12)">13</div>
+				<div class="box fourBox"  onclick="goForward(13)">14</div>
+				<div class="box fourBox"  onclick="goForward(14)">15</div>
+				<div class="box fourBox"  onclick="goForward(15)">16</div>
+			</div>
+		</div>
+		<div id="vowelBox" class="box">Vwl Wrd</div>
+		<div id="connectionLives">X X X</div>
+		<div id="bigTimer" class="box"></div>
+		<div id="footerWrapper">
+			<div id="toggleDeltaBox" class="box footerBox" onclick="toggleDelta()">+</div>
+			<div id="answerBox" class="box infoBox">Answer Box</div>
+			<div class="box footerBox" onclick="stopTimer()">X</div>
+		</div>
+	</div>
+    </body>
+    
+    <script src="scripts/init.js">
+    </script>
+    
+</html>

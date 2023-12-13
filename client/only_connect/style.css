@@ -1,0 +1,174 @@
+* { box-sizing: border-box; }
+body {
+	font-family: Arial;
+	margin: 0;
+}
+
+#bodyWrapper {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	overflow: auto;
+	width: 100vw;
+	height: 100vh;
+	visibility: hidden;
+	padding: 0.5vw;
+}
+
+.box {
+	margin: 0.5vw;
+	font-size: 3vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	user-select: none;
+	border-radius: 1vw;
+	border-color: black;
+	border-style: solid;
+	background-color: grey;
+}
+
+.pictureBox {
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 1vw;
+}
+
+.infoBox {
+	min-height: 10vh;
+	flex-grow: 1;
+}
+
+#titleWrapper {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	flex-grow: 1;
+	height: 100%;
+	max-height: 10vh;
+}
+
+.score {
+	width: 10vh;
+	min-height: 10vh;
+}
+
+#footerWrapper {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	flex-grow: 1;
+	height: 100%;
+	max-height: 10vh;
+	margin-bottom: 0.5vw;
+}
+
+.footerBox {
+	width: 10vh;
+	min-height: 10vh;
+}
+
+#fourBoxWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	flex-grow: 1;
+	height: 100%;
+	max-height: 16.5vw;
+}
+
+#fourBoxTimerWrapper {
+	margin: 0.5vw;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	flex-grow: 1;
+	height: 100%;
+	max-height: 2.75vw;
+	
+}
+
+.fourBoxTimer {
+	height: 100%;
+	aspect-ratio: 8;
+	font-size: 2vw;
+}
+
+#fourBoxBoxWrapper {
+	margin: 0.5vw;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	flex-grow: 1;
+	height: 100%;
+	max-height: 11vw;
+}
+
+.fourBox {
+	height: 100%;
+	aspect-ratio: 2;
+}
+
+#sixBoxWrapper {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	flex-grow: 1;
+	max-height: 70vh;
+}
+
+.sixBoxThreeWrapper {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+	height: 100%;
+	max-height: 20vw;
+}
+
+.threeBox {
+	height: 100%;
+	aspect-ratio: 1;
+}
+
+#connectionWrapper {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	flex-grow: 1;
+	max-height: 60vh;
+}
+
+.connectionFourWrapper {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+	height: 100%;
+	max-height: 12vw;
+}
+
+#connectionLives {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	margin-top: 0.5vw;
+	font-size: 8vh;
+	color: red;
+	font-weight: bold;
+}
+
+#bigTimer {
+	min-height: 5vh;
+}
+
+#vowelBox {
+	flex-grow: 1;
+	max-height: 20vh;
+}
