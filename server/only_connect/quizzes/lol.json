@@ -1,0 +1,132 @@
+{
+	"groups": [
+		{
+			"boxes": ["Jayce", "Yuumi", "Aphelios", "Udyr"],
+			"answer": "Different Ability Skill Points",
+			"type": "text"
+		},
+        
+			"boxes": ["Graves", "Gragas", "Urgot", "Taric"],
+			"answer": "Male KD/A Members",
+			"type": "text"
+		},
+        
+			"boxes": ["Caesura", "Cry of the Shrieking City", "Icathia's Curse", "Vespertide"],
+			"answer": "Ornn Items",
+			"type": "text"
+		},
+        
+			"boxes": ["Luden's Tempest", "Liandry's Anguish", "Plated Steelcaps", "Control Ward"],
+			"answer": "Items that replaced a previous version of themselves",
+			"type": "text"
+		},
+        
+			"boxes": [],
+			"answer": "",
+			"type": "text"
+		},
+        
+			"boxes": [],
+			"answer": "",
+			"type": "text"
+		}
+	],
+	"sequences": [
+		{
+			"boxes": ["1:30", "5:00", "8:00", "20:00"],
+			"answer": "Spawn Times of Neutral Objectives",
+			"type": "text"
+		},
+        
+			"boxes": ["Aatrox", "Ahri", "Akali", "Akshan"],
+			"answer": "Champions in Alphabetical Order",
+			"type": "text"
+		},
+        
+			"boxes": ["Hwei", "Briar", "Naafiri", "Milio"],
+			"answer": "Newest Champions by Release Date",
+			"type": "text"
+		},
+        
+			"boxes": ["Raptors", "Wolves", "Krugs", "Minions"],
+			"answer": "First Four TFT Monster Rounds in Reverse",
+			"type": "text"
+		},
+        
+			"boxes": ["Unstoppable", "Dominating", "Godlike", "Legendary"],
+			"answer": "Announcer titles for Consecutive Kills",
+			"type": "text"
+		},
+        
+			"boxes": [],
+			"answer": "",
+			"type": "text"
+		}
+	],
+	"connections": [
+		[
+			{
+				"boxes": [],
+				"answer": ""
+			},
+            {
+				"boxes": [],
+				"answer": ""
+			},
+            {
+				"boxes": [],
+				"answer": ""
+			},
+            {
+				"boxes": [],
+				"answer": ""
+			}
+		],
+		[
+			{
+				"boxes": [],
+				"answer": ""
+			},
+            {
+				"boxes": [],
+				"answer": ""
+			},
+            {
+				"boxes": [],
+				"answer": ""
+			},
+            {
+				"boxes": [],
+				"answer": ""
+			}
+		]
+	],
+	"vowels": [
+		{
+			"categoryName": "Champion Titles",
+			"questions": [
+				{
+					"question": "drkn bld",
+					"answer": "darkin blade"
+				},
+				{
+					"question": "nntld fx",
+					"answer": "nine-tailed fox"
+				}
+			]
+		},
+		{
+			"categoryName": "Items",
+			"questions": [
+				{
+					"question": "kndlgm",
+					"answer": "kindlegem"
+				},
+				{
+					"question": "bts",
+					"answer": "boots"
+				}
+			]
+		}
+	]
+}

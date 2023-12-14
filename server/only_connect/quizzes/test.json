@@ -103,28 +103,28 @@
 	],
 	"vowels": [
 		{
-			"categoryName": "Champion Titles",
+			"categoryName": "Food",
 			"questions": [
 				{
-					"question": "drkn bld",
-					"answer": "darkin blade"
+					"question": "B RD",
+					"answer": "BREAD"
 				},
 				{
-					"question": "nntld fx",
-					"answer": "nine-tailed fox"
+					"question": "C HS",
+					"answer": "CHEESE"
 				}
 			]
 		},
 		{
-			"categoryName": "Items",
+			"categoryName": "Clothes",
 			"questions": [
 				{
-					"question": "kndlgm",
-					"answer": "kindlegem"
+					"question": "JM PR",
+					"answer": "JUMPER"
 				},
 				{
-					"question": "bts",
-					"answer": "boots"
+					"question": "S HS",
+					"answer": "SHOES"
 				}
 			]
 		}
