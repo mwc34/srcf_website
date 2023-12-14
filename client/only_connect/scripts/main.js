@@ -696,6 +696,7 @@ else {
 	})
     socket.on("disconnect", () => {
         stopAudio();
+        bodyWrapper.style.visibility = "hidden";
     })
 }
 
