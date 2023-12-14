@@ -689,8 +689,8 @@ else {
 	socket.on("connect", () => {
 		socket.emit("init", "only_connect");
 	})
-	socket.on("gameState", (gameState) => {
-		gameState = gameState;
+	socket.on("gameState", (newGameState) => {
+		gameState = newGameState;
 		if (gameState.timer.active && !timerTimeout) {
 			startTimer();
 		}

@@ -19,7 +19,7 @@ function startTimer() {
 	let update = false;
 	if (gameState.timer.active) {
 		gameState.timer.time -= 0.05;
-		if (gameState.timer.time % 1 == 0) {
+		if (gameState.timer.time % 1 <= 0.05) {
 			update = true;
 		}
 	}
