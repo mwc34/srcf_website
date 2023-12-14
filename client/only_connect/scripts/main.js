@@ -694,10 +694,6 @@ else {
 		}
 		updateGame();
 	})
-    socket.on("disconnect", () => {
-        stopAudio();
-        bodyWrapper.style.visibility = "hidden";
-    })
 }
 
 function main() {
