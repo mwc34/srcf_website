@@ -99,7 +99,7 @@
 				"boxes": ["13", "14", "15", "16"],
 				"answer": "Connection 4"
 			}
-		],
+		]
 	],
 	"vowels": [
 		{
@@ -112,7 +112,7 @@
 				{
 					"question": "nntld fx",
 					"answer": "nine-tailed fox"
-				},
+				}
 			]
 		},
 		{
@@ -125,8 +125,8 @@
 				{
 					"question": "bts",
 					"answer": "boots"
-				},
+				}
 			]
 		}
-	],
+	]
 }
