@@ -33,12 +33,7 @@ function startTimer() {
 }
 
 function stopTimer() {
-	if (!local) {
-		socket.emit("stopTimer");
-		return;
-	}
-	
-	let state = gameState[gameState.shownSection];
+    let state = gameState[gameState.shownSection];
 	switch (gameState.shownSection) {
 		case "groups":
 		case "sequences":
@@ -53,7 +48,37 @@ function stopTimer() {
 		case "vowels":
 			break;
 	}
-	updateGame();
+}
+
+function buzz() {
+    let name = "HOST";
+    if (!local) {
+		socket.emit("buzz", name);
+		return;
+	}
+    
+    let valid = false;
+    let state = gameState[gameState.shownSection];
+	switch (gameState.shownSection) {
+		case "groups":
+		case "sequences":
+            let active = gameState.timer.active;
+			stopTimer();
+            if (active && !gameState.timer.active && !gameState.buzzer) {
+                valid = true;
+            }
+		case "connections":
+			break;
+		case "vowels":
+            if (!gameState.buzzer && state.question) {
+                valid = true;
+            }
+			break;
+	}
+    if (valid) {
+        gameState.buzzer = name;
+        updateGame();
+    }
 }
 
 function undoBuzzer() {
@@ -61,6 +86,21 @@ function undoBuzzer() {
 		socket.emit("undoBuzzer");
 		return;
 	}
+    
+    if (gameState.buzzer) {
+        gameState.buzzer = null;
+        
+        if (gameState.shownSection == "groups" || gameState.shownSection == "sequences") {
+            let state = gameState[gameState.shownSection];
+            let maxBoxes = gameState.shownSection == "groups" ? 4 : 3;
+            if (state.questionType && !gameState.timer.active && gameState.timer.active > 0 && !state.answer && state.boxes.length <= maxBoxes) {
+                if (!timerTimeout) {
+                    startTimer();
+                }
+            }
+        }
+        updateGame();
+    }
 }
 
 function revealAnswer(param) {

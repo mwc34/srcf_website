@@ -49,12 +49,10 @@ function stopTimer() {
         case "sequences":
             if (state.questionType && !state.answer && gameState.timer.active) {
                 gameState.timer.active = false;
-                update = true;
             }
         case "connections":
             if (state.lives == 0 && gameState.timer.active) {
                 gameState.timer.active = false;
-                update = true;
             }
             break;
         case "vowels":
@@ -134,12 +132,46 @@ function connection(socket) {
         io.in("only_connect").emit("gameState", gameState);
     })
     
-    socket.on("stopTimer", () => {
-        stopTimer();
+    socket.on("buzz", (name) => {
+        let valid = false;
+        let state = gameState[gameState.shownSection];
+        switch (gameState.shownSection) {
+            case "groups":
+            case "sequences":
+                let active = gameState.timer.active;
+                stopTimer();
+                if (active && !gameState.timer.active && !gameState.buzzer) {
+                    valid = true;
+                }
+            case "connections":
+                break;
+            case "vowels":
+                if (!gameState.buzzer && state.question) {
+                    valid = true;
+                }
+                break;
+        }
+        if (valid) {
+            gameState.buzzer = name;
+            io.in("only_connect").emit("gameState", gameState);
+        }
     })
     
     socket.on("undoBuzzer", () => {
+        if (gameState.buzzer) {
+            gameState.buzzer = null;
         
+            if (gameState.shownSection == "groups" || gameState.shownSection == "sequences") {
+                let state = gameState[gameState.shownSection];
+                let maxBoxes = gameState.shownSection == "groups" ? 4 : 3;
+                if (state.questionType && !gameState.timer.active && gameState.timer.active > 0 && !state.answer && state.boxes.length <= maxBoxes) {
+                    if (!timerTimeout) {
+                        startTimer();
+                    }
+                }
+            }
+            io.in("only_connect").emit("gameState", gameState);
+        }
     })
     
     socket.on("revealAnswer", (param) => {
