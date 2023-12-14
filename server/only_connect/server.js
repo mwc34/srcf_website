@@ -379,6 +379,10 @@ function connection(socket) {
                                             state.boxes.completed.push(guess);
                                             state.boxes.floating.splice(state.boxes.floating.indexOf(guess), 1);
                                         }
+                                        if (state.boxes.completed.length == 12) {
+                                            state.boxes.completed.push(...state.boxes.floating);
+                                            state.boxes.floating = [];
+                                        }
                                         break;
                                     }
                                 }

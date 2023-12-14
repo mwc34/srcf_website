@@ -321,6 +321,10 @@ function goForward(param) {
 										state.boxes.completed.push(guess);
 										state.boxes.floating.splice(state.boxes.floating.indexOf(guess), 1);
 									}
+                                    if (state.boxes.completed.length == 12) {
+                                        state.boxes.completed.push(...state.boxes.floating);
+                                        state.boxes.floating = [];
+                                    }
 									break;
 								}
 							}
@@ -435,8 +439,18 @@ function goForward(param) {
 	updateGame();
 }
 
+function shuffle(array) {
+    let tmp, current, top = array.length;
 
+    if(top) while(--top) {
+        current = Math.floor(Math.random() * (top + 1));
+        tmp = array[current];
+        array[current] = array[top];
+        array[top] = tmp;
+    }
 
+    return array;
+};
 
 // -------------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------------
@@ -526,7 +540,8 @@ function updateGame() {
 				box.style.opacity = "";
 				if (gameState[section].boxes.length > i) {
 					box.style.visibility = "visible";
-					switch (gameState[section].questionType) {
+                    // If "?", then show via text, even if it's a different questionType
+					switch (gameState[section].boxes[i] == "?" || gameState[section].questionType) {
 						case "music":
 							box.innerHTML = `<img class="pictureBox" src="assets/music_background.png"/>`
 							if (gameState[section].boxes.length == i+1) {
@@ -541,6 +556,7 @@ function updateGame() {
 							box.innerHTML = `<img class="pictureBox" src="${gameState[section].boxes[i]}"/>`
 							break;
 						case "text":
+                        default:
 							box.innerHTML = gameState[section].boxes[i];
 							break;
 					}
@@ -809,14 +825,14 @@ var gameQuestions = {
 			"type": "text"
 		},
 		{
-			"boxes": ["17", "18", "19", "20"],
-			"answer": "Sequence 5",
-			"type": "text"
+			"boxes": ["assets/sea_shanty_2.mp3", "assets/scape_main.mp3", "assets/arabian_2.mp3", "assets/newbie_melody.mp3"],
+			"answer": "OSRS Songs",
+			"type": "music"
 		},
 		{
-			"boxes": ["21", "22", "23", "24"],
-			"answer": "Sequence 6",
-			"type": "text"
+			"boxes": ["assets/scoop.png", "assets/muck.png", "assets/lofty.png", "assets/roley.png"],
+			"answer": "Bob the Builder Machines",
+			"type": "picture"
 		}
 	],
 	"connections": [
