@@ -1,4 +1,9 @@
 function changeScore(score_idx, delta) {
+	if (!local) {
+		socket.emit("changeScore", score_idx, delta);
+		return;
+	}
+	
 	for (let i=0; i<gameState.scores.length; i++) {
 		if (score_idx === i) {
 			gameState.scores[score_idx] += delta;
@@ -8,22 +13,31 @@ function changeScore(score_idx, delta) {
 }
 
 function startTimer() {
-	gameState.timer.time -= 0.05;
+	if (gameState.timer.active) {
+		gameState.timer.time -= 0.05;
+	}
+	
 	if (gameState.timer.time <= 0) {
 		gameState.timer.time = 0;
 		gameState.timer.active = false;
 	}
 	
 	if (gameState.timer.active)	{
-		setTimeout(startTimer, 50);
+		timerTimeout = setTimeout(startTimer, 50);
 	}
 	else {
 		stopAudio();
+		timerTimeout = null;
 	}
 	updateGame();
 }
 
 function stopTimer() {
+	if (!local) {
+		socket.emit("stopTimer");
+		return;
+	}
+	
 	let state = gameState[gameState.shownSection];
 	switch (gameState.shownSection) {
 		case "groups":
@@ -43,10 +57,18 @@ function stopTimer() {
 }
 
 function undoBuzzer() {
-	
+	if (!local) {
+		socket.emit("undoBuzzer");
+		return;
+	}
 }
 
 function revealAnswer(param) {
+	if (!local) {
+		socket.emit("revealAnswer", param);
+		return;
+	}
+	
 	let state = gameState[gameState.shownSection];
 	if (gameState.shownSection == "groups" || gameState.shownSection == "sequences") {
 		if (state.questionType && !gameState.timer.active && !state.answer) {
@@ -65,6 +87,11 @@ function revealAnswer(param) {
 }
 
 function goForward(param) {
+	if (!local) {
+		socket.emit("goForward", param);
+		return;
+	}
+	
 	let state = gameState[gameState.shownSection];
 	switch (gameState.shownSection) {
 		case "groups":
@@ -76,7 +103,9 @@ function goForward(param) {
 					if (!state.boxes.length) {
 						gameState.timer.time = state.maxTime;
 						gameState.timer.active = true;
-						startTimer();
+						if (!timerTimeout) {
+							startTimer();
+						}
 					}
 					// Next box
 					state.boxes.push(question.boxes[state.boxes.length]);
@@ -152,7 +181,10 @@ function goForward(param) {
 					state.lives = 3;
 					gameState.timer.time = state.maxTime;
 					gameState.timer.active = true;
-					startTimer();
+					if (!timerTimeout) {
+						startTimer();
+					}
+					
 				}
 			}
 			else if (!gameState.timer.active) {
@@ -349,18 +381,7 @@ function goForward(param) {
 	updateGame();
 }
 
-function shuffle(array) {
-    let tmp, current, top = array.length;
 
-    if(top) while(--top) {
-        current = Math.floor(Math.random() * (top + 1));
-        tmp = array[current];
-        array[current] = array[top];
-        array[top] = tmp;
-    }
-
-    return array;
-};
 
 
 // -------------------------------------------------------------------------------------------------------------------------
@@ -601,6 +622,7 @@ function updateGame() {
 	bodyWrapper.style.visibility = "visible";
 }
 
+var timerTimeout = null;
 var gameState = {
 	"shownSection": null,
 	"scores": [0, 0],
@@ -658,14 +680,21 @@ var audio = new Audio();
 audio.loop = true;
 var delta = 1;
 var socket = null;
-const local = true;
+const local = false;
 if (local) {
 	updateGame()
 }
 else {
 	socket = io({autoConnect: false})
-	socket.on('connect', () => {
-		socket.emit('init', 'only_connect');
+	socket.on("connect", () => {
+		socket.emit("init", "only_connect");
+	})
+	socket.on("gameState", (gameState) => {
+		gameState = gameState;
+		if (gameState.timer.active && !timerTimeout) {
+			startTimer();
+		}
+		updateGame();
 	})
 }
 

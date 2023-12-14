@@ -30,10 +30,10 @@ body {
 }
 
 .infoBox {
-	min-height: 10vh;
+	height: 10vh;
 	flex-grow: 1;
 	margin: 0.5vw;
-	font-size: 7vh;
+	font-size: 10vh;
 	overflow: hidden;
 	display: flex;
 	justify-content: center;

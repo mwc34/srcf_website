@@ -1,0 +1,132 @@
+{
+	"groups": [
+		{
+			"boxes": ["1", "2", "3", "4"],
+			"answer": "Group 1",
+			"type": "text"
+		},
+		{
+			"boxes": ["5", "6", "7", "8"],
+			"answer": "Group 2",
+			"type": "text"
+		},
+		{
+			"boxes": ["9", "10", "11", "12"],
+			"answer": "Group 3",
+			"type": "text"
+		},
+		{
+			"boxes": ["13", "14", "15", "16"],
+			"answer": "Group 4",
+			"type": "text"
+		},
+		{
+			"boxes": ["assets/sea_shanty_2.mp3", "assets/scape_main.mp3", "assets/arabian_2.mp3", "assets/newbie_melody.mp3"],
+			"answer": "OSRS Songs",
+			"type": "music"
+		},
+		{
+			"boxes": ["assets/scoop.png", "assets/muck.png", "assets/lofty.png", "assets/roley.png"],
+			"answer": "Bob the Builder Machines",
+			"type": "picture"
+		}
+	],
+	"sequences": [
+		{
+			"boxes": ["1", "2", "3", "4"],
+			"answer": "Sequence 1",
+			"type": "text"
+		},
+		{
+			"boxes": ["5", "6", "7", "8"],
+			"answer": "Sequence 2",
+			"type": "text"
+		},
+		{
+			"boxes": ["9", "10", "11", "12"],
+			"answer": "Sequence 3",
+			"type": "text"
+		},
+		{
+			"boxes": ["13", "14", "15", "16"],
+			"answer": "Sequence 4",
+			"type": "text"
+		},
+		{
+			"boxes": ["17", "18", "19", "20"],
+			"answer": "Sequence 5",
+			"type": "text"
+		},
+		{
+			"boxes": ["21", "22", "23", "24"],
+			"answer": "Sequence 6",
+			"type": "text"
+		}
+	],
+	"connections": [
+		[
+			{
+				"boxes": ["a", "b", "c", "d"],
+				"answer": "Connection a"
+			},
+			{
+				"boxes": ["e", "f", "g", "h"],
+				"answer": "Connection b"
+			},
+			{
+				"boxes": ["i", "j", "k", "l"],
+				"answer": "Connection c"
+			},
+			{
+				"boxes": ["m", "n", "o", "p"],
+				"answer": "Connection d"
+			}
+		],
+		[
+			{
+				"boxes": ["1", "2", "3", "4"],
+				"answer": "Connection 1"
+			},
+			{
+				"boxes": ["5", "6", "7", "8"],
+				"answer": "Connection 2"
+			},
+			{
+				"boxes": ["9", "10", "11", "12"],
+				"answer": "Connection 3"
+			},
+			{
+				"boxes": ["13", "14", "15", "16"],
+				"answer": "Connection 4"
+			}
+		],
+	],
+	"vowels": [
+		{
+			"categoryName": "Champion Titles",
+			"questions": [
+				{
+					"question": "drkn bld",
+					"answer": "darkin blade"
+				},
+				{
+					"question": "nntld fx",
+					"answer": "nine-tailed fox"
+				},
+			]
+		},
+		{
+			"categoryName": "Items",
+			"questions": [
+				{
+					"question": "kndlgm",
+					"answer": "kindlegem"
+				},
+				{
+					"question": "bts",
+					"answer": "boots"
+				},
+			]
+		}
+	],
+}
