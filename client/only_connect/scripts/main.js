@@ -94,6 +94,7 @@ function undoBuzzer() {
             let state = gameState[gameState.shownSection];
             let maxBoxes = gameState.shownSection == "groups" ? 4 : 3;
             if (state.questionType && !gameState.timer.active && gameState.timer.active > 0 && !state.answer && state.boxes.length <= maxBoxes) {
+                gameState.timer.active = true;
                 if (!timerTimeout) {
                     startTimer();
                 }
