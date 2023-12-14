@@ -182,9 +182,8 @@ function connection(socket) {
                 if (param >= 0 && param === state.boxes.length-1) {
                     state.fixedScore = param;
                     let question = gameQuestions[gameState.shownSection][state.questionsDone[state.questionsDone.length-1]];
-                    while (state.boxes.length < question.boxes.length) {
-                        state.boxes.push(question.boxes[state.boxes.length]);
-                    }
+                    state.boxes = [];
+                    state.boxes.push(...question.boxes);
                     state.answer = question.answer;
                     gameState.buzzer = null;
                 }
@@ -210,10 +209,22 @@ function connection(socket) {
                             }
                         }
                         // Next box
-                        state.boxes.push(question.boxes[state.boxes.length]);
-                        state.fixedScore = null;
-                        state.answer = null;
-                        gameState.buzzer = null;
+                        if (gameState.timer.active && (gameState.shownSection == "groups" || state.boxes.length < question.boxes.length-1)) {
+                            state.boxes.push(question.boxes[state.boxes.length]);
+                            state.fixedScore = null;
+                            state.answer = null;
+                            gameState.buzzer = null;
+                        }
+                        else if (!gameState.timer.active) {
+                            state.boxes = [];
+                            state.boxes.push(...question.boxes);
+                            state.fixedScore = null;
+                            state.answer = null;
+                            gameState.buzzer = null;
+                            if (gameState.shownSection == "sequences") {
+                                state.boxes[state.boxes.length-1] = "?";
+                            }
+                        }
                     }
                     else if (!state.answer) {
                         if (!gameState.timer.active) {
