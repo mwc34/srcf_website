@@ -406,8 +406,6 @@ function toggleDelta() {
 		toggleDeltaBox.innerHTML = "+";
 		delta = 1;
 	}
-	
-	
 }
 
 function updateScore(score_idx) {
@@ -417,7 +415,7 @@ function updateScore(score_idx) {
 function stopAudio() {
 	if (!audio.paused || audio.currentTime) {
 		audio.pause();
-		audio.src = "";
+        audio.src = "";
 	}
 }
 
@@ -481,7 +479,7 @@ function updateGame() {
 								let src = gameState[section].boxes[i];
 								if (!audio.src.endsWith(src) && gameState.timer.active) {
 									audio.src = src;
-									audio.play();
+                                    audio.play();
 								}
 							}
 							break;
@@ -696,6 +694,9 @@ else {
 		}
 		updateGame();
 	})
+    socket.on("disconnect", () => {
+        stopAudio();
+    })
 }
 
 function main() {
