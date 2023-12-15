@@ -58,9 +58,9 @@
 			"type": "text"
 		},
         {
-			"boxes": [],
-			"answer": "",
-			"type": "text"
+			"boxes": ["assets/lol_music_warriors.mp3", "assets/lol_music_collide.mp3", "assets/lol_music_ignite.mp3", "assets/lol_music_legends.mp3"],
+			"answer": "World Championship Songs",
+			"type": "music"
 		}
 	],
 	"connections": [
