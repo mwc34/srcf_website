@@ -230,6 +230,8 @@ function connection(socket) {
                         if (!gameState.timer.active) {
                             // Show answer
                             state.answer = question.answer;
+                            state.boxes = [];
+                            state.boxes.push(...question.boxes);
                         }
                     }
                     else {
