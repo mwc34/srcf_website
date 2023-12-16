@@ -16,6 +16,11 @@ function shuffle(array) {
 };
 
 function startTimer() {
+    if (!gameState) {
+        timerTimeout = null;
+        return;
+    }
+    
     let update = false;
     if (gameState.timer.active) {
         gameState.timer.time -= 0.05;
