@@ -74,11 +74,11 @@
 				"answer": "Prime Numbers"
 			},
 			{
-				"boxes": ["4", "16", "25", "36"],
+				"boxes": ["25", "36", "49", "81"],
 				"answer": "Square Numbers"
 			},
 			{
-				"boxes": ["1", "32", "128", "512"],
+				"boxes": ["16", "32", "128", "512"],
 				"answer": "Powers of Two"
 			}
 		],
