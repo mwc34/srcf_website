@@ -1,0 +1,148 @@
+{
+	"groups": [
+		{
+			"boxes": ["Wales", "Northern Island", "Scotland", "England"],
+			"answer": "Countries of the United Kingdom",
+			"type": "text"
+		},
+		{
+			"boxes": ["Owl", "Robin", "Ladybird", "Puffin"],
+			"answer": "School Classes",
+			"type": "text"
+		},
+		{
+			"boxes": ["Stories", "Teeth", "Pyjamas", "Sleep"],
+			"answer": "Parts of Bedtime",
+			"type": "text"
+		},
+		{
+			"boxes": ["Train", "Plane", "Ship", "Car"],
+			"answer": "Modes of Transform",
+			"type": "text"
+		},
+		{
+			"boxes": ["assets/cbeebies_heyduggee.mp3", "assets/cbeebies_lovemonster.mp3", "assets/cbeebies_alphablocks.mp3", "assets/cbeebies_numberblocks.mp3"],
+			"answer": "Cbeebies Songs",
+			"type": "music"
+		},
+		{
+			"boxes": ["assets/scoop.png", "assets/muck.png", "assets/lofty.png", "assets/roley.png"],
+			"answer": "Bob the Builder Machines",
+			"type": "picture"
+		}
+	],
+	"sequences": [
+		{
+			"boxes": ["1", "2", "4", "8"],
+			"answer": "Powers of Two",
+			"type": "text"
+		},
+		{
+			"boxes": ["2", "3", "5", "7"],
+			"answer": "Prime Numbers",
+			"type": "text"
+		},
+		{
+			"boxes": ["1", "1", "2", "3"],
+			"answer": "Fibonacci Numbers",
+			"type": "text"
+		},
+		{
+			"boxes": ["1", "4", "9", "16"],
+			"answer": "Square Numbers",
+			"type": "text"
+		},
+		{
+			"boxes": ["1", "8", "27", "64"],
+			"answer": "Cube Numbers",
+			"type": "text"
+		},
+		{
+			"boxes": ["assets/numberblocks_one", "assets/numberblocks_two", "assets/numberblocks_three", "assets/numberblocks_four"],
+			"answer": "Numberblocks",
+			"type": "picture"
+		}
+	],
+	"connections": [
+		[
+			{
+				"boxes": ["8", "27", "64", "125"],
+				"answer": "Cube Numbers"
+			},
+			{
+				"boxes": ["2", "3", "5", "7"],
+				"answer": "Prime Numbers"
+			},
+			{
+				"boxes": ["4", "16", "25", "36"],
+				"answer": "Square Numbers"
+			},
+			{
+				"boxes": ["1", "32", "128", "512"],
+				"answer": "Powers of Two"
+			}
+		],
+		[
+			{
+				"boxes": ["Apple", "Orange", "Banana", "Strawberry"],
+				"answer": "Fruits"
+			},
+			{
+				"boxes": ["Rice", "Bread", "Pasta", "Potato"],
+				"answer": "Carbohydrates"
+			},
+			{
+				"boxes": ["Carrot", "Tomato", "Sweetcorn", "Peas"],
+				"answer": "Vegetables"
+			},
+			{
+				"boxes": ["Sausage", "Beef", "Pork", "Chicken"],
+				"answer": "Meat"
+			}
+		]
+	],
+	"vowels": [
+		{
+			"categoryName": "Food",
+			"questions": [
+				{
+					"question": "B RD",
+					"answer": "BREAD"
+				},
+				{
+					"question": "C HS",
+					"answer": "CHEESE"
+				},
+                {
+					"question": "BGL",
+					"answer": "BAGEL"
+				},
+				{
+					"question": "S PGHT T",
+					"answer": "SPAGHETTI"
+				}
+			]
+		},
+		{
+			"categoryName": "Clothes",
+			"questions": [
+				{
+					"question": "JM PR",
+					"answer": "JUMPER"
+				},
+				{
+					"question": "S HS",
+					"answer": "SHOES"
+				},
+                {
+					"question": "SHR T",
+					"answer": "SHIRT"
+				},
+				{
+					"question": "PJM S",
+					"answer": "PYJAMAS"
+				}
+			]
+		}
+	]
+}

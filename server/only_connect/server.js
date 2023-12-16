@@ -60,7 +60,7 @@ function stopTimer() {
     }
 }
 
-const gameQuestions = JSON.parse(fs.readFileSync("only_connect/quizzes/test.json", "utf8"));
+const gameQuestions = JSON.parse(fs.readFileSync("only_connect/quizzes/fun.json", "utf8"));
 // Shuffle questions
 gameQuestions["groups"] = shuffle(gameQuestions["groups"]);
 gameQuestions["sequences"] = shuffle(gameQuestions["sequences"]);
