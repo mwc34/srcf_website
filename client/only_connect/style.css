@@ -28,6 +28,7 @@ body {
 	border-style: solid;
 	background-color: grey;
 	overflow: hidden;
+	touch-action: manipulation;
 }
 
 .pictureBox {
