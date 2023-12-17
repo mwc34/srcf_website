@@ -770,6 +770,33 @@ function main() {
 	socket.connect();
 }
 
+var currentWidth = 0;
+var currentHeight = 0;
+
+function setSize() {
+	bodyWrapper.style.width = window.innerWidth + 'px';
+	bodyWrapper.style.height = window.innerHeight + 'px';
+}
+
+function saveSize() {
+	currentWidth = window.innerWidth;
+	currentHeight = window.innerHeight;
+}
+
+// Set the global orientation variable as soon as the page loads
+addEventListener("load", () => {
+	setSize();
+	saveSize();
+})
+
+// Adjust viewport values only if width/height change
+window.addEventListener("resize", () => {
+	if (window.innerWidth != currentWidth || window.innerHeight != currentHeight) {
+		setSize();
+		saveSize();
+	}
+});
+
 var gameQuestions = {
 	"groups": [
 		{
