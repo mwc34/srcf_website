@@ -525,7 +525,7 @@ function updateGame() {
 				else {
 					box.style.opacity = "";
 				}
-				box.onclick = () => {
+				box.onmousedown = () => {
 					goForward(box.innerHTML.toLowerCase());
 				}
 			}
@@ -536,7 +536,7 @@ function updateGame() {
 			// Groups/Sequences
 			for (let i=0; i<fourBoxBoxWrapper.childElementCount; i++) {
 				let box = fourBoxBoxWrapper.children[i];
-				box.onclick = () => {revealAnswer(i)};
+				box.onmousedown = () => {revealAnswer(i)};
 				box.style.opacity = "";
 				if (gameState[section].boxes.length > i) {
 					box.style.visibility = "visible";
