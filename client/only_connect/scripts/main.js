@@ -155,14 +155,26 @@ function goForward(param) {
                         gameState.buzzer = null;
                     }
                     else if (!gameState.timer.active) {
-                        state.boxes = [];
-                        state.boxes.push(...question.boxes);
-                        state.fixedScore = null;
+						if (state.questionType == "music") {
+							state.boxes.push(question.boxes[state.boxes.length]);
+						}
+						else {
+							state.boxes = [];
+							state.boxes.push(...question.boxes);
+                        }
+						state.fixedScore = null;
                         state.answer = null;
                         gameState.buzzer = null;
-                        if (gameState.shownSection == "sequences") {
+                        if (state.boxes.length == question.boxes.length && gameState.shownSection == "sequences") {
                             state.boxes[state.boxes.length-1] = "?";
                         }
+						else if (state.questionType == "music") {
+							gameState.timer.time = state.maxTime;
+							gameState.timer.active = true;
+							if (!timerTimeout) {
+								startTimer();
+							}
+						}
                     }
 				}
 				else if (!state.answer) {
@@ -457,8 +469,8 @@ function shuffle(array) {
 // -------------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------------
-const TIMER_DONE_COLOUR = "#FFC0CB";
-const TIMER_UNDONE_COLOUR = "#00FFFF";
+const TIMER_DONE_COLOUR = "#264653";
+const TIMER_UNDONE_COLOUR = "#FDF0D5";
 
 
 function capitalize(s) {
@@ -528,6 +540,7 @@ function updateGame() {
 				box.onmousedown = () => {
 					goForward(box.innerHTML.toLowerCase());
 				}
+				box.style.backgroundColor = "#F4A261";
 			}
 		}
 		else {
@@ -538,6 +551,7 @@ function updateGame() {
 				let box = fourBoxBoxWrapper.children[i];
 				box.onmousedown = () => {revealAnswer(i)};
 				box.style.opacity = "";
+				box.style.backgroundColor = "#C05761";
 				if (gameState[section].boxes.length > i) {
 					box.style.visibility = "visible";
                     // If "?", then show via text, even if it's a different questionType
@@ -611,8 +625,8 @@ function updateGame() {
 	// Update connectionWrapper
 	if (section == "connections") {
 		connectionWrapper.style.display = "";
-		let highlightedColour = "cyan";
-		let completedColours = ["red", "green", "yellow", "blue"];
+		let highlightedColour = "#FAE588";
+		let completedColours = ["#92bf6e", "#7fa65f", "#6b8c50", "#587342"];
 		for (let i=0; i<connectionBoxes.length; i++) {
 			let box = connectionBoxes[i];
 			let completedSets = gameState[section].boxes.completed.length / 4;
@@ -628,7 +642,7 @@ function updateGame() {
 				if (gameState[section].boxes.highlighted.includes(box.innerHTML)) {
 					box.style.backgroundColor = highlightedColour;
 				} else {
-					box.style.backgroundColor = "";
+					box.style.backgroundColor = "#F4A261";
 				}
 			}
 			// Erroneous
@@ -676,7 +690,15 @@ function updateGame() {
 	
 	// Update the answerBox
 	if (section && (gameState[section].answer || gameState.buzzer)) {
-		answerBox.innerHTML = gameState[section].answer || gameState.buzzer;
+		let answerBoxColours = ["#485e36", "#992638"];
+		if (gameState[section].answer) {
+			answerBox.innerHTML = gameState[section].answer;
+			answerBox.style.backgroundColor = answerBoxColours[0];
+		}
+		else {
+			answerBox.innerHTML = gameState.buzzer;
+			answerBox.style.backgroundColor = answerBoxColours[1];
+		}
 		answerBox.style.visibility = "visible";
 	}
 	else {
@@ -719,7 +741,7 @@ var gameState = {
 	},
 	"connections": {
 		"done": false,
-		"maxTime": 150,
+		"maxTime": 1,
 		"currentBoard": 0,
 		"lives": 3,
 		"boxes": {

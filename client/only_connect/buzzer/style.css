@@ -13,6 +13,7 @@ body {
 	width: 100vw;
 	height: 100vh;
 	padding: 0.5vw;
+	background-color: #FDF0D5;
 }
 
 #buzzerDiv {
@@ -45,4 +46,14 @@ body {
 	border-color: black;
 	border-style: solid;
 	background-color: grey;
+}
+
+#nameBox {
+	background-color: #FAE588;
+}
+
+#buzzerBox {
+	background-color: transparent;
+	border: none;
+	color: #992638;
 }

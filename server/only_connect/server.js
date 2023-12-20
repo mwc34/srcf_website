@@ -221,14 +221,26 @@ function connection(socket) {
                             gameState.buzzer = null;
                         }
                         else if (!gameState.timer.active) {
-                            state.boxes = [];
-                            state.boxes.push(...question.boxes);
-                            state.fixedScore = null;
-                            state.answer = null;
-                            gameState.buzzer = null;
-                            if (gameState.shownSection == "sequences") {
-                                state.boxes[state.boxes.length-1] = "?";
-                            }
+                            if (state.questionType == "music") {
+								state.boxes.push(question.boxes[state.boxes.length]);
+							}
+							else {
+								state.boxes = [];
+								state.boxes.push(...question.boxes);
+							}
+							state.fixedScore = null;
+							state.answer = null;
+							gameState.buzzer = null;
+							if (state.boxes.length == question.boxes.length && gameState.shownSection == "sequences") {
+								state.boxes[state.boxes.length-1] = "?";
+							}
+							else if (state.questionType == "music") {
+								gameState.timer.time = state.maxTime;
+								gameState.timer.active = true;
+								if (!timerTimeout) {
+									startTimer();
+								}
+							}
                         }
                     }
                     else if (!state.answer) {
