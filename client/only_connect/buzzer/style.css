@@ -31,11 +31,11 @@ body {
 	border-radius: 1vw;
 	touch-action: manipulation;
 	aspect-ratio: 1;
+	object-fit: contain;
 }
 
 .infoBox {
 	height: 10vh;
-	flex-grow: 1;
 	margin: 0.5vw;
 	font-size: 10vh;
 	overflow: hidden;
