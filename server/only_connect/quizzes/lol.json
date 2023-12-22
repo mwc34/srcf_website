@@ -97,7 +97,7 @@
 			},
             {
 				"boxes": ["Nunu", "Sejuani", "Rell", "Kled"],
-				"answer": "Mounted"
+				"answer": "Mounted Champions"
 			}
 		]
 	],
@@ -110,7 +110,7 @@
 					"answer": "DIVINE SUNDERER"
 				},
 				{
-					"question": "LC KTFT HRNS LR",
+					"question": "LCK TFT HRN SLR",
 					"answer": "LOCKET OF THE IRON SOLARI"
 				},
 				{
@@ -124,23 +124,23 @@
 			]
 		},
 		{
-			"categoryName": "Champion Titles",
+			"categoryName": "Champions + Titles",
 			"questions": [
 				{
-					"question": "THF RBL WT HMN TN",
-					"answer": "THE FIRE BELOW THE MOUNTAIN"
+					"question": "RNNT HFR BLW THM NTN",
+					"answer": "ORNN THE FIRE BELOW THE MOUNTAIN"
 				},
 				{
-					"question": "THLD YFL MN STY",
-					"answer": "THE LADY OF LUMINOSITY"
+					"question": "LXT HLD YFLM NSTY",
+					"answer": "LUX THE LADY OF LUMINOSITY"
 				},
 				{
-					"question": "THBY WHS HTTR DTM",
-					"answer": "THE BOY WHO SHATTERED TIME"
+					"question": "KKT HBY WHS HTTR DTM",
+					"answer": "EKKO THE BOY WHO SHATTERED TIME"
 				},
 				{
-					"question": "THH RTFT HFR LJRD",
-					"answer": "THE HEART OF THE FRELJORD"
+					"question": "BRMT HH RTFT HFR LJRD",
+					"answer": "BRAUM THE HEART OF THE FRELJORD"
 				}
 			]
 		},
@@ -152,11 +152,11 @@
 					"answer": "DEPTH CHARGE"
 				},
 				{
-					"question": "DM NCS CNSN",
+					"question": "DMN CSC NSN",
 					"answer": "DEMONIC ASCENSION"
 				},
 				{
-					"question": "THHX TCHL TMTM",
+					"question": "THH XTC HLT MTM",
 					"answer": "THE HEXTECH ULTIMATUM"
 				},
 				{
@@ -173,7 +173,7 @@
 					"answer": "SPIRIT BLOSSOM YONE"
 				},
 				{
-					"question": "PLP RT YMS SFR TN",
+					"question": "PLPR TYM SSF RTN",
 					"answer": "POOL PARTY MISS FORTUNE"
 				},
 				{
@@ -181,7 +181,7 @@
 					"answer": "ASTRONAUT BARD"
 				},
 				{
-					"question": "FL LMT LRM MS",
+					"question": "FLLM TLR MMS",
 					"answer": "FULL METAL RAMMUS"
 				}
 			]
