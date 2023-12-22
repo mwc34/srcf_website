@@ -26,7 +26,7 @@
 			"type": "text"
 		},
         {
-			"boxes": ["assets/cleanse.png", "assets/exhaust.png", "assets/mark.png", "assets/ghost.png"],
+			"boxes": ["assets/cleanse.png", "assets/exhaust.jpg", "assets/mark.jpg", "assets/ghost.png"],
 			"answer": "Summoner Spells",
 			"type": "picture"
 		}
