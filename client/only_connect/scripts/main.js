@@ -77,6 +77,7 @@ function buzz() {
 	}
     if (valid) {
         gameState.buzzer = name;
+		buzzerAudio.play();
         updateGame();
     }
 }
@@ -768,6 +769,8 @@ for (let c of connectionWrapper.children) {
 }
 var audio = new Audio();
 audio.loop = true;
+const buzzerAudio = new Audio();
+buzzerAudio.src = "assets/buzzer.wav";
 var delta = 1;
 var socket = null;
 const local = false;
@@ -780,6 +783,9 @@ else {
 		socket.emit("init", "only_connect");
 	})
 	socket.on("gameState", (newGameState) => {
+		if (newGameState.buzzer && !gameState.buzzer && newGameState.buzzer != "HOST") {
+			buzzerAudio.play();
+		}
 		gameState = newGameState;
 		if (gameState.timer.active && !timerTimeout) {
 			startTimer();

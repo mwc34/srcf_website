@@ -96,7 +96,7 @@
 				"answer": "Spin to Win"
 			},
             {
-				"boxes": ["Nunu", "Sejuani", "Rell", "Kled"],
+				"boxes": ["Nunu & Willump", "Sejuani", "Rell", "Kled"],
 				"answer": "Mounted Champions"
 			}
 		]
@@ -131,8 +131,8 @@
 					"answer": "ORNN THE FIRE BELOW THE MOUNTAIN"
 				},
 				{
-					"question": "LXT HLD YFLM NSTY",
-					"answer": "LUX THE LADY OF LUMINOSITY"
+					"question": "THRS HTHC HNW RDN",
+					"answer": "THRESH THE CHAIN WARDEN"
 				},
 				{
 					"question": "KKT HBY WHS HTTR DTM",
@@ -177,8 +177,8 @@
 					"answer": "POOL PARTY MISS FORTUNE"
 				},
 				{
-					"question": "STR NTB RD",
-					"answer": "ASTRONAUT BARD"
+					"question": "LMN TLS TLX",
+					"answer": "ELEMENTALIST LUX"
 				},
 				{
 					"question": "FLLM TLR MMS",
