@@ -79,7 +79,7 @@
 			},
             {
 				"boxes": ["Syndra", "Zilean", "Aurelion Sol", "Nami"],
-				"answer": "Champions that Hover"
+				"answer": "Champions that Hover/Float"
 			}
 		],
 		[
@@ -92,7 +92,7 @@
 				"answer": "Generates Extra Gold"
 			},
             {
-				"boxes": ["Tryndamere", "Rammus", "Darius", "Garen"],
+				"boxes": ["Tryndamere", "Rammus", "Darius", "Katarina"],
 				"answer": "Spin to Win"
 			},
             {
