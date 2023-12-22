@@ -66,39 +66,40 @@
 	"connections": [
 		[
 			{
-				"boxes": ["Gnar", "Jayce", "Shyvana", "Elise"],
-				"answer": "Transforms"
+				"boxes": ["Garen", "Darius", "Volibear", "Yone"],
+				"answer": "Champions with Siblings"
 			},
             {
-				"boxes": ["Caitlyn", "Nidalee", "Teemo", "Rengar"],
-				"answer": "Interacts with Bushes"
+				"boxes": ["Ornn", "Jarvan IV", "Ivern", "Taliyah"],
+				"answer": "Champions that make Terrain"
 			},
             {
 				"boxes": ["Bard", "Veigar", "Thresh", "Kindred"],
-				"answer": "Infinite Scaling"
+				"answer": "Champions with Infinite Scaling"
 			},
             {
-				"boxes": ["Syndra", "Zilean", "Aurelion Sol", "Nami"],
+				"boxes": ["Syndra", "Zilean", "Aurelion Sol", "Malzahar"],
 				"answer": "Champions that Hover/Float"
 			}
 		],
 		[
 			{
-				"boxes": ["Ezreal", "Lillia", "Shen", "Jinx"],
-				"answer": "Global Ability"
+				"boxes": ["Gnar", "Jayce", "Shyvana", "Elise"],
+				"answer": "Champions that Transform"
 			},
             {
-				"boxes": ["Draven", "Pyke", "Gangplank", "Jax"],
-				"answer": "Generates Extra Gold"
+				"boxes": ["Caitlyn", "Nidalee", "Teemo", "Rengar"],
+				"answer": "Champions that interact with Bushes"
+			},
+			{
+				"boxes": ["Ezreal", "Lillia", "Shen", "Ashe"],
+				"answer": "Champions with Global Abilities"
 			},
             {
-				"boxes": ["Tryndamere", "Rammus", "Darius", "Katarina"],
-				"answer": "Spin to Win"
-			},
-            {
-				"boxes": ["Nunu &amp; Willump", "Sejuani", "Rell", "Kled"],
-				"answer": "Mounted Champions"
+				"boxes": ["Singed", "Viktor", "Ekko", "Jinx"],
+				"answer": "Champions in Arcane"
 			}
+            
 		]
 	],
 	"vowels": [
