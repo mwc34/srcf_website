@@ -66,12 +66,12 @@
 	"connections": [
 		[
 			{
-				"boxes": ["Garen", "Darius", "Volibear", "Yone"],
-				"answer": "Champions with Siblings"
+				"boxes": ["Gnar", "Jayce", "Shyvana", "Elise"],
+				"answer": "Champions that Transform"
 			},
             {
-				"boxes": ["Ornn", "Jarvan IV", "Ivern", "Taliyah"],
-				"answer": "Champions that make Terrain"
+				"boxes": ["Caitlyn", "Nidalee", "Teemo", "Rengar"],
+				"answer": "Champions that interact with Bushes"
 			},
             {
 				"boxes": ["Bard", "Veigar", "Thresh", "Kindred"],
@@ -84,12 +84,12 @@
 		],
 		[
 			{
-				"boxes": ["Gnar", "Jayce", "Shyvana", "Elise"],
-				"answer": "Champions that Transform"
+				"boxes": ["Garen", "Darius", "Volibear", "Yone"],
+				"answer": "Champions with Siblings"
 			},
             {
-				"boxes": ["Caitlyn", "Nidalee", "Teemo", "Rengar"],
-				"answer": "Champions that interact with Bushes"
+				"boxes": ["Ornn", "Jarvan IV", "Ivern", "Taliyah"],
+				"answer": "Champions that make Terrain"
 			},
 			{
 				"boxes": ["Ezreal", "Lillia", "Shen", "Ashe"],
