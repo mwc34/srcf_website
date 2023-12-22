@@ -96,7 +96,7 @@
 				"answer": "Spin to Win"
 			},
             {
-				"boxes": ["Nunu & Willump", "Sejuani", "Rell", "Kled"],
+				"boxes": ["Nunu &amp; Willump", "Sejuani", "Rell", "Kled"],
 				"answer": "Mounted Champions"
 			}
 		]
