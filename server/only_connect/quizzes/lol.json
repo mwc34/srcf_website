@@ -65,14 +65,7 @@
 	],
 	"connections": [
 		[
-			{
-				"boxes": ["Gnar", "Jayce", "Shyvana", "Elise"],
-				"answer": "Champions that Transform"
-			},
-            {
-				"boxes": ["Caitlyn", "Nidalee", "Teemo", "Rengar"],
-				"answer": "Champions that interact with Bushes"
-			},
+			
             {
 				"boxes": ["Bard", "Veigar", "Thresh", "Kindred"],
 				"answer": "Champions with Infinite Scaling"
@@ -80,16 +73,6 @@
             {
 				"boxes": ["Syndra", "Zilean", "Aurelion Sol", "Malzahar"],
 				"answer": "Champions that Hover/Float"
-			}
-		],
-		[
-			{
-				"boxes": ["Garen", "Darius", "Volibear", "Yone"],
-				"answer": "Champions with Siblings"
-			},
-            {
-				"boxes": ["Ornn", "Jarvan IV", "Ivern", "Taliyah"],
-				"answer": "Champions that make Terrain"
 			},
 			{
 				"boxes": ["Ezreal", "Lillia", "Shen", "Ashe"],
@@ -99,6 +82,25 @@
 				"boxes": ["Singed", "Viktor", "Ekko", "Jinx"],
 				"answer": "Champions in Arcane"
 			}
+		],
+		[
+			{
+				"boxes": ["Gnar", "Jayce", "Shyvana", "Elise"],
+				"answer": "Champions that Transform"
+			},
+            {
+				"boxes": ["Caitlyn", "Nidalee", "Teemo", "Rengar"],
+				"answer": "Champions that interact with Bushes"
+			},
+			{
+				"boxes": ["Garen", "Darius", "Volibear", "Yone"],
+				"answer": "Champions with Siblings"
+			},
+            {
+				"boxes": ["Ornn", "Jarvan IV", "Anivia", "Taliyah"],
+				"answer": "Champions that make Terrain"
+			},
+			
             
 		]
 	],
