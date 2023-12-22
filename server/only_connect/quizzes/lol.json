@@ -58,7 +58,7 @@
 			"type": "picture"
 		},
         {
-			"boxes": ["assets/lol_music_warriors.mp3", "assets/lol_music_collide.mp3", "assets/lol_music_ignite.mp3", "assets/lol_music_legends.mp3"],
+			"boxes": ["assets/lol_music_warriors.mp3", "assets/lol_music_collide.mp3", "assets/lol_music_ignite.mp3", "Legends Never Die"],
 			"answer": "World Championship Songs",
 			"type": "music"
 		}

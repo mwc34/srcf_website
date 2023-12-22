@@ -556,7 +556,8 @@ function updateGame() {
 				if (gameState[section].boxes.length > i) {
 					box.style.visibility = "visible";
                     // If "?", then show via text, even if it's a different questionType
-					switch (gameState[section].boxes[i] == "?" || gameState[section].questionType) {
+					// If answer of sequence music round, then show as text
+					switch (gameState[section].boxes[i] == "?" || (section == "sequences" && gameState[section].questionType == "music" && i==fourBoxBoxWrapper.childElementCount-1) || gameState[section].questionType) {
 						case "music":
 							box.innerHTML = `<img class="pictureBox" src="assets/music_background.png"/>`
 							if (gameState[section].boxes.length == i+1) {
@@ -880,7 +881,7 @@ var gameQuestions = {
 			"type": "text"
 		},
 		{
-			"boxes": ["assets/sea_shanty_2.mp3", "assets/scape_main.mp3", "assets/arabian_2.mp3", "assets/newbie_melody.mp3"],
+			"boxes": ["assets/sea_shanty_2.mp3", "assets/scape_main.mp3", "assets/arabian_2.mp3", "Newbie Melody"],
 			"answer": "OSRS Songs",
 			"type": "music"
 		},
