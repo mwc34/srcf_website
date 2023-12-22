@@ -65,7 +65,6 @@
 	],
 	"connections": [
 		[
-			
             {
 				"boxes": ["Bard", "Veigar", "Thresh", "Kindred"],
 				"answer": "Champions with Infinite Scaling"
@@ -99,9 +98,7 @@
             {
 				"boxes": ["Ornn", "Jarvan IV", "Anivia", "Taliyah"],
 				"answer": "Champions that make Terrain"
-			},
-			
-            
+			}
 		]
 	],
 	"vowels": [
