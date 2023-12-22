@@ -6,8 +6,8 @@
 			"type": "text"
 		},
         {
-			"boxes": ["Graves", "Gragas", "Urgot", "Taric"],
-			"answer": "Male KD/A Members",
+			"boxes": ["You know you want me.", "Are you the hunter... or the prey?", "Fear the assassin with no master.", "A clever fox is never caught."],
+			"answer": "Pick Quotes of KD/A Members",
 			"type": "text"
 		},
         {
@@ -21,25 +21,20 @@
 			"type": "text"
 		},
         {
-			"boxes": [],
-			"answer": "",
+			"boxes": ["Brush", "Umph", "Stana", "Force"],
+			"answer": "Can be preceded by 'Tri'",
 			"type": "text"
 		},
         {
-			"boxes": [],
-			"answer": "",
-			"type": "text"
+			"boxes": ["assets/cleanse.png", "assets/exhaust.png", "assets/mark.png", "assets/ghost.png"],
+			"answer": "Summoner Spells",
+			"type": "picture"
 		}
 	],
 	"sequences": [
 		{
 			"boxes": ["1:30", "5:00", "8:00", "20:00"],
 			"answer": "Spawn Times of Neutral Objectives",
-			"type": "text"
-		},
-        {
-			"boxes": ["Aatrox", "Ahri", "Akali", "Akshan"],
-			"answer": "Champions in Alphabetical Order",
 			"type": "text"
 		},
         {
@@ -57,6 +52,11 @@
 			"answer": "Announcer titles for Consecutive Kills",
 			"type": "text"
 		},
+		{
+			"boxes": ["assets/aatrox_r.png", "assets/ahri_e.png", "assets/akali_w.png", "assets/akshan_q.png"],
+			"answer": "Alphabetical Champion Abilities in Reverse Order",
+			"type": "picture"
+		},
         {
 			"boxes": ["assets/lol_music_warriors.mp3", "assets/lol_music_collide.mp3", "assets/lol_music_ignite.mp3", "assets/lol_music_legends.mp3"],
 			"answer": "World Championship Songs",
@@ -66,65 +66,123 @@
 	"connections": [
 		[
 			{
-				"boxes": [],
-				"answer": ""
+				"boxes": ["Gnar", "Jayce", "Shyvana", "Elise"],
+				"answer": "Transforms"
 			},
             {
-				"boxes": [],
-				"answer": ""
+				"boxes": ["Caitlyn", "Nidalee", "Teemo", "Rengar"],
+				"answer": "Interacts with Bushes"
 			},
             {
-				"boxes": [],
-				"answer": ""
+				"boxes": ["Bard", "Veigar", "Thresh", "Kindred"],
+				"answer": "Infinite Scaling"
 			},
             {
-				"boxes": [],
-				"answer": ""
+				"boxes": ["Syndra", "Zilean", "Aurelion Sol", "Nami"],
+				"answer": "Champions that Hover"
 			}
 		],
 		[
 			{
-				"boxes": [],
-				"answer": ""
+				"boxes": ["Ezreal", "Lillia", "Shen", "Jinx"],
+				"answer": "Global Ability"
 			},
             {
-				"boxes": [],
-				"answer": ""
+				"boxes": ["Draven", "Pyke", "Gangplank", "Jax"],
+				"answer": "Generates Extra Gold"
 			},
             {
-				"boxes": [],
-				"answer": ""
+				"boxes": ["Tryndamere", "Rammus", "Samira", "Garen"],
+				"answer": "Spin to Win"
 			},
             {
-				"boxes": [],
-				"answer": ""
+				"boxes": ["Nunu", "Sejuani", "Rell", "Kled"],
+				"answer": "Mounted"
 			}
 		]
 	],
 	"vowels": [
 		{
-			"categoryName": "Champion Titles",
+			"categoryName": "Items",
 			"questions": [
 				{
-					"question": "drkn bld",
-					"answer": "darkin blade"
+					"question": "DV NSN DRR",
+					"answer": "DIVINE SUNDERER"
 				},
 				{
-					"question": "nntld fx",
-					"answer": "nine-tailed fox"
+					"question": "LC KTFT HRNS LR",
+					"answer": "LOCKET OF THE IRON SOLARI"
+				},
+				{
+					"question": "QC KSL VRSS H",
+					"answer": "QUICKSILVER SASH"
+				},
+				{
+					"question": "GRD NN GL",
+					"answer": "GUARDIAN ANGEL"
 				}
 			]
 		},
 		{
-			"categoryName": "Items",
+			"categoryName": "Champion Titles",
 			"questions": [
 				{
-					"question": "kndlgm",
-					"answer": "kindlegem"
+					"question": "THF RBL WT HMN TN",
+					"answer": "THE FIRE BELOW THE MOUNTAIN"
 				},
 				{
-					"question": "bts",
-					"answer": "boots"
+					"question": "THLD YFL MN STY",
+					"answer": "THE LADY OF LUMINOSITY"
+				},
+				{
+					"question": "THBY WHS HTTR DTM",
+					"answer": "THE BOY WHO SHATTERED TIME"
+				},
+				{
+					"question": "THH RTFT HFR LJRD",
+					"answer": "THE HEART OF THE FRELJORD"
+				}
+			]
+		},
+		{
+			"categoryName": "Ultimate Ability Names",
+			"questions": [
+				{
+					"question": "DPT HCH RG",
+					"answer": "DEPTH CHARGE"
+				},
+				{
+					"question": "DM NCS CNSN",
+					"answer": "DEMONIC ASCENSION"
+				},
+				{
+					"question": "THHX TCHL TMTM",
+					"answer": "THE HEXTECH ULTIMATUM"
+				},
+				{
+					"question": "CNT HHL",
+					"answer": "ACE IN THE HOLE"
+				}
+			]
+		},
+		{
+			"categoryName": "Skin + Champion Names",
+			"questions": [
+				{
+					"question": "SPR TBL SSM YN",
+					"answer": "SPIRIT BLOSSOM YONE"
+				},
+				{
+					"question": "PLP RT YMS SFR TN",
+					"answer": "POOL PARTY MISS FORTUNE"
+				},
+				{
+					"question": "STR NTB RD",
+					"answer": "ASTRONAUT BARD"
+				},
+				{
+					"question": "FL LMT LRM MS",
+					"answer": "FULL METAL RAMMUS"
 				}
 			]
 		}

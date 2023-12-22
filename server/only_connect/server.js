@@ -70,6 +70,10 @@ const gameQuestions = JSON.parse(fs.readFileSync("only_connect/quizzes/fun.json"
 gameQuestions["groups"] = shuffle(gameQuestions["groups"]);
 gameQuestions["sequences"] = shuffle(gameQuestions["sequences"]);
 gameQuestions["connections"] = shuffle(gameQuestions["connections"]);
+gameQuestions["vowels"] = shuffle(gameQuestions["vowels"]);
+for (let category of gameQuestions["vowels"]) {
+	category.questions = shuffle(category.questions);
+}
 
 var timerTimeout = null;
 var gameState = null;
