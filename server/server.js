@@ -19,7 +19,7 @@ let folders = fs.readdirSync('.').filter(function (file) {
 
 for (let f of folders) {
     modules[f] = require('./' + f + '/server.js')
-    modules[f].init(io.of('/' + f)
+    modules[f].init(io.of('/' + f))
 }
 
 app.use(function(req, res, next) {
