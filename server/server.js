@@ -19,7 +19,7 @@ let folders = fs.readdirSync('.').filter(function (file) {
 
 for (let f of folders) {
     modules[f] = require('./' + f + '/server.js')
-    modules[f].init(io)
+    modules[f].init(io.of('/' + f)
 }
 
 app.use(function(req, res, next) {
@@ -30,12 +30,12 @@ app.use(function(req, res, next) {
   next();
 });
 
-io.on('connection', (socket) => {
-    socket.on('init', (m) => {
-        socket.join(m)
-        modules[m].connection(socket)
-    })
-})
+// io.on('connection', (socket) => {
+    // socket.on('init', (m) => {
+        // socket.join(m)
+        // modules[m].connection(socket)
+    // })
+// })
 
 // Listen
 console.log('Server Loaded')

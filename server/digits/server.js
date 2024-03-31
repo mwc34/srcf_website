@@ -23,6 +23,7 @@ function send_file(socket, file_name, emit_name) {
 
 function init(i) {
     io = i
+	io.on('connection', connection)
 }
 
 function connection(socket) {
@@ -53,5 +54,4 @@ function connection(socket) {
 
 module.exports = {
     init,
-    connection,
 }

@@ -43,7 +43,7 @@ function startTimer() {
     }
     
     if (update) {
-        io.in("only_connect").emit("gameState", gameState);
+        io.emit("gameState", gameState);
     }
 }
 
@@ -124,6 +124,7 @@ const baseGameState = {
 
 function init(i) {
     io = i
+	io.on("connection", connection)
 }
 
 function connection(socket) {
@@ -138,7 +139,7 @@ function connection(socket) {
                 gameState.scores[score_idx] += delta;
             }
         }
-        io.in("only_connect").emit("gameState", gameState);
+        io.emit("gameState", gameState);
     })
     
     socket.on("buzz", (name) => {
@@ -162,7 +163,7 @@ function connection(socket) {
         }
         if (valid) {
             gameState.buzzer = name;
-            io.in("only_connect").emit("gameState", gameState);
+            io.emit("gameState", gameState);
         }
     })
     
@@ -180,7 +181,7 @@ function connection(socket) {
                     }
                 }
             }
-            io.in("only_connect").emit("gameState", gameState);
+            io.emit("gameState", gameState);
         }
     })
     
@@ -198,7 +199,7 @@ function connection(socket) {
                 }
             }
         }
-        io.in("only_connect").emit("gameState", gameState);
+        io.emit("gameState", gameState);
     })
     
     socket.on("goForward", (param) => {
@@ -517,17 +518,17 @@ function connection(socket) {
                     }
                 }
         }
-        io.in("only_connect").emit("gameState", gameState);
+        io.emit("gameState", gameState);
     })
     
     socket.on("disconnect", () => {
-        if (!("only_connect" in io.sockets.adapter.rooms)) {
-            gameState = null;
-        }
+		console.log("SOCKET COUNT: " + io.sockets.size);
+        // if (!("only_connect" in io.sockets.adapter.rooms)) {
+            // gameState = null;
+        // }
     })
 }
 
 module.exports = {
     init,
-    connection,
 }

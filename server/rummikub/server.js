@@ -281,7 +281,7 @@ function nextTurn(id) {
     
     active_player_id = cycle[(cycle.indexOf(id)+1) % cycle.length]
 
-    io.in('rummikub').emit('new turn', active_player_id)
+    io.emit('new turn', active_player_id)
     
     let player = null
     for (let p of player_info) {
@@ -302,6 +302,7 @@ function nextTurn(id) {
 
 function init(i) {
     io = i
+	io.on('connection', connection)
 }
 
 function connection(socket) {
@@ -346,7 +347,7 @@ function connection(socket) {
                     }
                 }
             }
-            io.in('rummikub').emit('rc', p.player_id, p.name)
+            io.emit('rc', p.player_id, p.name)
         }
         
         
@@ -492,7 +493,7 @@ function connection(socket) {
 
 
         // Send it out
-        io.in('rummikub').emit('move tiles', {
+        io.emit('move tiles', {
             'target_set' : target_set,
             'source_id' : source_id,
             'rel_source' : source_id == -1 ? p.hand.tiles.length : source_set,
@@ -537,7 +538,7 @@ function connection(socket) {
                         p.hand.new_idxs = [i]
                     }
                 }
-                io.in('rummikub').emit('draw tile', p.player_id)
+                io.emit('draw tile', p.player_id)
 
                 socket.emit('update hand', p.hand)
             }
@@ -547,12 +548,12 @@ function connection(socket) {
         // Check win
         placed_tile = false
         if (!p.hand.tiles.length) {
-            io.in('rummikub').emit('game over', active_player_id)
+            io.emit('game over', active_player_id)
             game_winner = active_player_id
             for (let p of player_info) {
                 if (p.socket_id == null) {
                     player_info.splice(player_info.indexOf(p), 1)
-                    io.in('rummikub').emit('kick player', p.player_id)
+                    io.emit('kick player', p.player_id)
                 }
             }
         }
@@ -569,7 +570,7 @@ function connection(socket) {
             if (game_winner != null) {
                 if (!p.ready) {
                     p.ready = true
-                    io.in('rummikub').emit('ready', p.player_id)
+                    io.emit('ready', p.player_id)
                     
                     for (let p of player_info) {
                         if (!p.ready) {
@@ -590,7 +591,7 @@ function connection(socket) {
                 if (active_p && active_p.ready == null) {
                     if (!p.ready) {
                         p.ready = true
-                        io.in('rummikub').emit('ready', p.player_id)
+                        io.emit('ready', p.player_id)
                         for (let p of player_info) {
                             if (p.ready == false) {
                                 return
@@ -604,7 +605,7 @@ function connection(socket) {
                         // Kick the dc player
                         console.log(p.name + " kicked")
                         player_info.splice(player_info.indexOf(active_p), 1)
-                        io.in('rummikub').emit('kick player', active_p.player_id)
+                        io.emit('kick player', active_p.player_id)
                         
                         for (let t of active_p.hand.tiles) {
                             remaining_tiles.push(t)
@@ -616,7 +617,7 @@ function connection(socket) {
                             }
                         }
                         
-                        io.in('rummikub').emit('remaining tiles', remaining_tiles.length)
+                        io.emit('remaining tiles', remaining_tiles.length)
                         
                         // End Game if they were solo
                         if (active_p.player_id == active_player_id) {
@@ -627,10 +628,10 @@ function connection(socket) {
                                 p.ready = false
                                 if (p.socket_id == null) {
                                     player_info.splice(player_info.indexOf(p), 1)
-                                    io.in('rummikub').emit('kick player', p.player_id)
+                                    io.emit('kick player', p.player_id)
                                 }
                             }
-                            io.in('rummikub').emit('game over', game_winner)
+                            io.emit('game over', game_winner)
                             
                         }
                     }
@@ -660,7 +661,7 @@ function connection(socket) {
                 placed_tile = false
             }
             
-            io.in('rummikub').emit('undo', {
+            io.emit('undo', {
                 'player_id' : p.player_id,
                 'board' : board,
                 'placed_tile' : placed_tile,
@@ -679,7 +680,7 @@ function connection(socket) {
             if (!p.hand.tiles.length || game_winner != null) {
                 console.log(p.name + " kicked")
                 player_info.splice(player_info.indexOf(p), 1)
-                io.in('rummikub').emit('kick player', p.player_id)
+                io.emit('kick player', p.player_id)
             
             }
             // Playing
@@ -687,7 +688,7 @@ function connection(socket) {
                 console.log(p.name + " soft kick")
                 p.socket_id = null
                 p.ready = null
-                io.in('rummikub').emit('dc', p.player_id)
+                io.emit('dc', p.player_id)
             }
         }
     })
@@ -719,5 +720,4 @@ function connection(socket) {
 
 module.exports = {
     init,
-    connection,
 }

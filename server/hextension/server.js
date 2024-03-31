@@ -116,16 +116,17 @@ function getNextTile() {
         for (let p of game_state) {
             p.curr_tile_idx = null
         }
-        io.in('hextension').emit('next tile', curr_tile)
+        io.emit('next tile', curr_tile)
     }
     else {
         curr_tile = null
-        io.in('hextension').emit('game finished')
+        io.emit('game finished')
     }
 }
 
 function init(i) {
     io = i
+	io.on('connection', connection)
     resetGame()
 }
 
@@ -170,7 +171,7 @@ function connection(socket) {
                     }
                     p.curr_tile_idx = idx
 
-                    io.in('hextension').emit('place tile', p.player_id, idx)
+                    io.emit('place tile', p.player_id, idx)
                     
                     let all_finished = true
                     
@@ -195,7 +196,7 @@ function connection(socket) {
         if (p) {
             p.next_game_ready = true
             
-            io.in('hextension').emit('next game ready', p.player_id)
+            io.emit('next game ready', p.player_id)
             
             let next_game = true
             for (let p of game_state) {
@@ -218,7 +219,7 @@ function connection(socket) {
         if (p) {
             console.log(p.name + " kicked")
             game_state.splice(game_state.indexOf(p), 1)
-            io.in('hextension').emit('kick player', p.player_id)
+            io.emit('kick player', p.player_id)
             
             let reset_game = true
             let finish_game = remaining_tiles.length == 8 && curr_tile == null
@@ -257,5 +258,4 @@ function connection(socket) {
 
 module.exports = {
     init,
-    connection,
 }
