@@ -431,6 +431,15 @@ socket.on('cancel vote update', () => {
     reDrawClock()
 })
 
+socket.on('dead vote update', (seat_id) => {
+    let player = getPlayerBySeatID(seat_id)
+	if (player != null) {
+		player.dead_vote = false
+	}
+    reDrawDeadVotes()
+    reDrawHUD()
+})
+
 socket.on('phase update', (phase_update) => {
     game_state.day_phase = phase_update.day_phase
     game_state.phase_counter = phase_update.phase_counter

@@ -1090,11 +1090,20 @@ function setupNightActionPendings() {
 
 function setupDeadVote() {
     for (let i=0; i < max_players; i++) {
+        let token_seat = i
         let dead_vote = document.createElement('img')
         dead_vote.style.zIndex = 'inherit'
         dead_vote.style.position = 'absolute'
         dead_vote.style.visibility = 'hidden'
         dead_vote.src = 'assets/other/dead_vote.png'
+        dead_vote.onclick = () => {
+            if (client_type) {
+                let player = getPlayerBySeat(token_seat)
+                if (player != null && !player.alive && player.dead_vote) {
+                    socket.emit('dead vote update', player.seat_id)
+                }
+            }
+        }
         dead_votes.appendChild(dead_vote)
     }
 }

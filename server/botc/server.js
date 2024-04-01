@@ -1174,7 +1174,19 @@ function connection(socket) {
             clock_info.free = false
         }
     })
-    
+	
+	// Manual dead vote removal
+    socket.on('dead vote update', (channel_id, seat_id) => {
+        if (!rateLimit(socket)) {return}
+        if (channel_id in game_states && socket.id == game_states[channel_id].host_socket_id) {
+            let player = getPlayerBySeatID(game_states[channel_id], seat_id)
+            if (player != null && !player.alive && player.dead_vote) {
+				player.dead_vote = false
+                channelEmit(channel_id, 'dead vote update', player.seat_id) 
+            }
+        }
+    })
+	
     // Phase update
     socket.on('phase update', (channel_id, day_phase, phase_counter) => {
         if (!rateLimit(socket)) {return}
