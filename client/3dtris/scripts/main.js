@@ -20,7 +20,7 @@ const nextCtx = nextCanvas.getContext('2d');
 
 nextCtx.scale(0.25, 0.25);
 
-const socket = io({autoConnect: false})
+const socket = io("/3dtris", {autoConnect: false})
 
 const X = 0;
 const Y = 1;

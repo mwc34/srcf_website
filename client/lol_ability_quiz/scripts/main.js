@@ -2,7 +2,7 @@ const playerWrapper = document.getElementById('playerWrapper');
 const gameQuestion = document.getElementById('gameQuestion');
 const gameAnswers = document.getElementById('gameAnswers');
 
-const socket = io({autoConnect: false})
+const socket = io("/lol_ability_quiz", {autoConnect: false})
 
 var questionID = null;
 var playerName = null;

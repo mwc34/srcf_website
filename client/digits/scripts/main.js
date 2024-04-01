@@ -382,7 +382,7 @@ if (local) {
 	clickSection(0);
 }
 else {
-	socket = io({autoConnect: false})
+	socket = io("/digits", {autoConnect: false})
 	socket.on('connect', () => {
 		socket.emit('init', 'digits');
 		socket.emit('starting values', dateString, tomorrowDateString);

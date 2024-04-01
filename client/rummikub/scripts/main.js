@@ -3,7 +3,7 @@ const action_box = document.getElementById('actionBox')
 const board_box = document.getElementById('boardBox')
 const hand_box = document.getElementById('handBox')
 
-const socket = io({autoConnect: false})
+const socket = io("/rummikub", {autoConnect: false})
 
 const tile_ratio = 1.5 // Height is tile_ratio * width
 
