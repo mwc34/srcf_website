@@ -1100,7 +1100,7 @@ function setupDeadVote() {
             if (client_type) {
                 let player = getPlayerBySeat(token_seat)
                 if (player != null && !player.alive && player.dead_vote) {
-                    socket.emit('dead vote update', player.seat_id)
+                    socket.emit('dead vote update', channel_id, player.seat_id)
                 }
             }
         }
