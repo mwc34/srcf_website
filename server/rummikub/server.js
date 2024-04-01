@@ -329,7 +329,7 @@ function connection(socket) {
             
             player_info.push(p)
             
-            socket.to('rummikub').emit('new player', {
+            socket.emit('new player', {
                 'name' : p.name,
                 'player_id' : p.player_id,
                 'ready' : p.ready,
