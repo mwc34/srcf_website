@@ -1,4 +1,4 @@
-const client_path = '../../../public_html/botc/'
+const client_path = '../../public_html/botc/'
 const fs = require("fs")
 const path = require("path")
 var io = null
