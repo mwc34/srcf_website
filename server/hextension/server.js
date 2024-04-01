@@ -133,7 +133,7 @@ function init(i) {
 function connection(socket) {
 
     socket.on('new player', (name) => {
-        console.log("new player: " + name)
+        console.log("[HEXTENSION] new player: " + name)
         let p = JSON.parse(JSON.stringify(base_player_state))
         p.player_id = next_player_id
         p.socket_id = socket.id
@@ -217,7 +217,7 @@ function connection(socket) {
     socket.on('disconnect', () => {
         let p = getPlayerBySocketID(socket.id)
         if (p) {
-            console.log(p.name + " kicked")
+            console.log("[HEXTENSION] " + p.name + " kicked")
             game_state.splice(game_state.indexOf(p), 1)
             io.emit('kick player', p.player_id)
             

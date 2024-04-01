@@ -522,10 +522,10 @@ function connection(socket) {
     })
     
     socket.on("disconnect", () => {
-		console.log("SOCKET COUNT: " + io.sockets.size);
-        // if (!("only_connect" in io.sockets.adapter.rooms)) {
-            // gameState = null;
-        // }
+		console.log("[ONLY_CONNECT] SOCKET COUNT: " + io.sockets.size);
+        if (!io.sockets.size) {
+            gameState = null;
+        }
     })
 }
 

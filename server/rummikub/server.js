@@ -308,7 +308,7 @@ function init(i) {
 function connection(socket) {
     
     socket.on('new player', (name, connection_id) => {
-        console.log("new player: " + name)
+        console.log("[RUMMIKUB] new player: " + name)
         
         let p = null
         for (let player of player_info) {
@@ -603,7 +603,7 @@ function connection(socket) {
                         
                         
                         // Kick the dc player
-                        console.log(p.name + " kicked")
+                        console.log("[RUMMIKUB] " + p.name + " kicked")
                         player_info.splice(player_info.indexOf(active_p), 1)
                         io.emit('kick player', active_p.player_id)
                         
@@ -678,14 +678,14 @@ function connection(socket) {
         if (p) {
             // Not playing
             if (!p.hand.tiles.length || game_winner != null) {
-                console.log(p.name + " kicked")
+                console.log("[RUMMIKUB] " + p.name + " kicked")
                 player_info.splice(player_info.indexOf(p), 1)
                 io.emit('kick player', p.player_id)
             
             }
             // Playing
             else {
-                console.log(p.name + " soft kick")
+                console.log("[RUMMIKUB] " + p.name + " soft kick")
                 p.socket_id = null
                 p.ready = null
                 io.emit('dc', p.player_id)
