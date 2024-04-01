@@ -1626,7 +1626,7 @@ function connection(socket) {
             }, clientless_timeout)
         }
     })
-})
+}
 
 module.exports = {
 	init,
