@@ -166,7 +166,7 @@ function printInfo() {
     let hosts = 0
     let players = 0
     let spectators = 0
-    let total_clients = Object.keys(io.sockets.sockets).length
+    let total_clients = Object.keys(io.sockets).length
     for (let key in game_states) {
         hosts += Boolean(game_states[key].host_socket_id)
         players += game_states[key].player_info.reduce((a, b) => {return a + Boolean(b.socket_id)}, 0)
