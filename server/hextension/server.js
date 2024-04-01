@@ -151,7 +151,7 @@ function connection(socket) {
             to_emit.push({'name' : p.name, 'player_id' : p.player_id, 'board_state' : p.board_state, 'curr_tile_idx' : p.curr_tile_idx})
         }
         socket.emit('current state', p.player_id, to_emit, remaining_tiles, curr_tile)
-        socket.emit('new player', {'player_id' : p.player_id, 'name' : name, 'board_state' : p.board_state, 'curr_tile_idx' : null})
+        socket.broadcast.emit('new player', {'player_id' : p.player_id, 'name' : name, 'board_state' : p.board_state, 'curr_tile_idx' : null})
     })
     
     socket.on('place tile', (idx) => {

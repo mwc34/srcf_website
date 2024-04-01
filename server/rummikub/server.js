@@ -329,7 +329,7 @@ function connection(socket) {
             
             player_info.push(p)
             
-            socket.emit('new player', {
+            socket.broadcast.emit('new player', {
                 'name' : p.name,
                 'player_id' : p.player_id,
                 'ready' : p.ready,
