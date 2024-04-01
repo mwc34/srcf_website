@@ -1,23 +1,7 @@
-const express = require('express')
-const app = express()
-const server = require('http').createServer(app)
-const io = require('socket.io')(server, {
-    pingInterval: 20000,
-    pingTimeout: 10000,
-    maxHttpBufferSize: 50000,
-})
-
-const client_path = '../../public_html/botc/'
+const client_path = '../../../public_html/botc/'
 const fs = require("fs")
 const path = require("path")
-
-app.use(function(req, res, next) {
-  res.setHeader('x-debug', 'hit')
-  res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate')
-  res.setHeader('Expires', '-1')
-  res.setHeader('Pragma', 'no-cache')
-  next();
-});
+var io = null
 
 // Copy state
 function copy(state) {
@@ -414,9 +398,13 @@ const base_player_info = {
     'night_action' : false,
 }
 
-// Socket Updates
+function init(i) {
+	io = i
+	io.on('connection', connection)
+}
 
-io.on('connection', (socket) => {
+// Socket Updates
+function connection(socket) {
     
     let ip = socket.request.headers['x-forwarded-for']
     
@@ -1640,7 +1628,6 @@ io.on('connection', (socket) => {
     })
 })
 
-// Listen
-console.log('Server Loaded')
-// server.listen('~/myapp/web.sock')
-server.listen('40457')
+module.exports = {
+	init,
+}

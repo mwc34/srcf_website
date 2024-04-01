@@ -73,7 +73,7 @@ const base_editions = []
 window.fetch('json/editions.json').then(x => x.json()).then(x => {for (let edition of x) {base_editions.push(edition)}})
 const base_fabled = []
 window.fetch('json/fabled.json').then(x => x.json()).then(x => {for (let fabled of x) {base_fabled.push(fabled)}})
-const socket = typeof io != 'undefined' ? io({autoConnect: false}) : null
+const socket = typeof io != 'undefined' ? io("/botc", {autoConnect: false}) : null
 Notification.requestPermission()
 var size = Math.min(window.innerWidth, window.innerHeight)
 var game_state = {
