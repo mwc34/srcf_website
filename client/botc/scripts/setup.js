@@ -2232,7 +2232,7 @@ function setupEditionMenu() {
                 new_chars_added = []
                 new_fabled_added_count = 0
                 for (let i of filecontent) {
-                    let c = getCharacterFromID(i.id)
+                    let c = getCharacterFromID(i.id || i)
                     // Character
                     if (c) {
                         if (!(c.team in characters)) {
@@ -2245,8 +2245,8 @@ function setupEditionMenu() {
                         
                     }
                     // Fabled
-                    else if (getFabledFromID(i.id)) {
-                        c = getFabledFromID(i.id)
+                    else if (getFabledFromID(i.id || i)) {
+                        c = getFabledFromID(i.id || i)
                         if (c && !fabled.includes(c.id)) {
                             fabled.push(c.id)
                         }
