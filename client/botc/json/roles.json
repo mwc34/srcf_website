@@ -3190,6 +3190,13 @@
                 "name":"Harpy Madness",
                 "players":2
             }
+        ],
+        "nightActionsScoped":[
+            {
+                "name":"You Are Harpy Mad",
+                "inPlayers":1,
+                "scope":"local",
+            }
         ]
     },
 	{
@@ -3274,7 +3281,12 @@
             },
             {
                 "name": "Hatter Choice Taken",
-                "info": "That choice has already been taken. Please choose another option"
+                "info": "That choice has already been taken. Please choose another option",
+                "scope":"local",
+                "scopeRestrictions":[
+                    "minion",
+                    "demon"
+                ]
             }
         ]
     },
@@ -3299,7 +3311,10 @@
             {
                 "name": "Kazali Minion Choice",
                 "players":1,
-                "characters":1
+                "characters":1,
+                "characterRestrictions": [
+                    "minion"
+                ]
             }
         ]
     },
