@@ -182,17 +182,17 @@ function endGame(channel_id) {
     
     // Disconnect
     if (state.host_socket_id) {
-        io.sockets.sockets[state.host_socket_id].disconnect()
+        io.sockets[state.host_socket_id].disconnect()
     }
     
     for (let p of state.player_info) {
         if (p.socket_id) {
-            io.sockets.sockets[p.socket_id].disconnect()
+            io.sockets[p.socket_id].disconnect()
         }
     }
     
     for (let s of state.spectators) {
-        io.sockets.sockets[s].disconnect()
+        io.sockets[s].disconnect()
     }
     
     // Clear timeouts
