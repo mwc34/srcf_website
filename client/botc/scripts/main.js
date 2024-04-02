@@ -59,6 +59,7 @@ const edition_icon = document.getElementById('editionIcon')
 const reveal_grimoire = document.getElementById('revealGrimoire')
 const nomination_status = document.getElementById('nominationStatus')
 const change_nomination_status = document.getElementById('changeNominationStatus')
+const change_secret_voting = document.getElementById('changeSecretVoting')
 const urlParams = new URLSearchParams(window.location.search);
 const max_players = 20
 const max_new_fabled_per_edition = 5
@@ -97,6 +98,7 @@ var game_state = {
     'day_phase' : false,
     'phase_counter' : 0,
     'nominations_open' : false,
+    'secret_voting': false,
 }
 
 var day_bg_image = 'url("assets/other/day.png")'

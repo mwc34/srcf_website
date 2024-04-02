@@ -353,6 +353,27 @@ socket.on('nomination update', (clock_info) => {
     reDrawVotes()
 })
 
+socket.on('secret voting update', (secret_voting_update) => {
+    game_state.secret_voting = secret_voting_update.secret_voting
+    if (game_state.secret_voting && !client_type) {
+        for (let player of game_state.player_info) {
+            if (player.seat_id != your_seat_id) {
+                player.voting = false
+            }
+        }
+    }
+    else if (!game_state.secret_voting) {
+        for (let seat_id in secret_voting_update.voting) {
+            let player = getPlayerBySeatID(seat_id)
+            if (player != null) {
+                player.voting = secret_voting_update.voting[seat_id]
+            }
+        }
+    }
+    reDrawClock()
+    reDrawVotes()
+})
+
 socket.on('start vote update', () => {
     game_state.clock_info.start_time = (new Date()).getTime()
     clockAnimation()

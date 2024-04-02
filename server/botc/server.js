@@ -380,6 +380,7 @@ const base_state = {
     'day_phase' : false,
     'phase_counter' : 0,
     'nominations_open' : false,
+    'secret_voting' : false,
 }
 
 const base_player_info = {
@@ -1055,7 +1056,17 @@ function connection(socket) {
                 let cut_off = position * clock_info.interval + latency_leeway
                 if ((clock_info.start_time == null || curr_time - clock_info.start_time < cut_off) && (!(Boolean(vote_update) && !player.alive && !player.dead_vote) || clock_info.free)) {
                     player.voting = Boolean(vote_update)
-                    channelEmit(channel_id, 'vote update', {'seat_id' : player.seat_id, 'voting' : player.voting})
+                    let voting_msg = {'seat_id' : player.seat_id, 'voting' : player.voting}
+                    if (game_states[channel_id].secret_voting) {
+                        let state = game_states[channel_id]
+                        if (state.host_socket_id != null) {
+                            io.to(state.host_socket_id).emit('vote update', voting_msg)
+                        }
+                        socket.emit('vote update', voting_msg)
+                    }
+                    else {
+                        channelEmit(channel_id, 'vote update', voting_msg)
+                    }
                 }
             }
         }
@@ -1090,7 +1101,33 @@ function connection(socket) {
                     clock_info.nominatee = nominatee.seat_id
                     clock_info.active = true
                     clock_info.free = Boolean(nomination_update.free)
+                    clock_info.secret = state.secret_voting
                     channelEmit(channel_id, 'nomination update', clock_info)
+                }
+            }
+        }
+    })
+    
+    // Secret voting update
+    socket.on('secret voting update', (channel_id, secret_voting) => {
+        if (!rateLimit(socket)) {return}
+        if (channel_id in game_states && socket.id == game_states[channel_id].host_socket_id) {
+            let new_secret_voting = Boolean(secret_voting)
+            let clock_info = game_states[channel_id].clock_info
+            if (clock_info.start_time == null && new_secret_voting != game_states[channel_id].secret_voting) {
+                game_states[channel_id].secret_voting = new_secret_voting
+                let secret_voting_update = {"secret_voting": new_secret_voting}
+                if (!new_secret_voting) {
+                    secret_voting_update.voting = {}
+                    for (let player of game_state[channel_id].player_info) {
+                        secret_voting_update.voting[player.seat_id] = player.voting
+                    }
+                }
+                if (clock_info.active) {
+                    channelEmit(channel_id, 'secret voting update', secret_voting_update)
+                }
+                else {
+                     
                 }
             }
         }

@@ -102,6 +102,7 @@ function setup() {
     setupRevealGrimoire()
     setupNominationStatus()
     setupChangeNominationStatus()
+    setupChangeSecretVoting()
 }
 
 function addHover(e, colour_1 = getFontColour(), colour_2 = getSelectedFontColour()) {
@@ -1581,6 +1582,15 @@ function setupChangeNominationStatus() {
                 })
                 alert_box.check()
             }
+        }
+    }
+}
+
+function setupChangeSecretVoting() {
+    change_secret_voting.style.position = 'absolute'
+    change_secret_voting.onclick = () => {
+        if (client_type && game_state.clock_info.start_time == null) {
+            socket.emit('secret voting update', channel_id, !game_state.secret_voting)
         }
     }
 }
