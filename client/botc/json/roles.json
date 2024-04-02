@@ -3195,7 +3195,7 @@
             {
                 "name":"You Are Harpy Mad",
                 "inPlayers":1,
-                "scope":"local",
+                "scope":"local"
             }
         ]
     },
