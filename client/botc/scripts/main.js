@@ -546,6 +546,9 @@ function startNightAction(night_action) {
             'text' : night_action.info,
             'type' : 'prompt',
             'func' : (res) => {
+                if (!night_action.info.includes("<>")) {
+                    res = "default"
+                }
                 if (res) {
                     night_action_info.info.push(res)
                 }
