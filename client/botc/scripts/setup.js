@@ -2201,6 +2201,9 @@ function setupEditionMenu() {
                 }
             }
             let name = event.target.files[0].name.replace(/\.[^\.]*/, "")
+            if (filecontent[0].name) {
+                name = filecontent[0].name
+            }
             let id = name.replaceAll(/[^\w]/g, "").toLowerCase()
             
             if (!id || !name) {
@@ -2232,6 +2235,9 @@ function setupEditionMenu() {
                 new_chars_added = []
                 new_fabled_added_count = 0
                 for (let i of filecontent) {
+                    if (i.id == "_meta") {
+                        continue
+                    }
                     let c = getCharacterFromID(i.id || i)
                     // Character
                     if (c) {
