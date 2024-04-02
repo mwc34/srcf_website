@@ -387,12 +387,20 @@ socket.on('finish vote update', () => {
             + (votes ? " from " + vote_names : ".")))
     }
         
-        
+    let dead_vote_users = 0
+    let dead_vote_names = ""
     for (let player of game_state.player_info) {
         if (!player.alive && player.dead_vote && player.voting && !clock_info.free) {
             player.dead_vote = false
+            dead_vote_users++
+            dead_vote_names += getLogPlayerStyle(player.name) + ', '
         }
     }
+    if (dead_vote_users && (client_type || game_state.log_status % 2 == 0)) {
+        dead_vote_names = dead_vote_names.slice(0, -2)
+        appendLog(getLogDefaultStyle(dead_vote_names + " used their dead vote" + (dead_vote_users == 1 ? '' : "s")))
+    }
+    
     if (!clock_info.free) {
         getPlayerBySeatID(clock_info.nominator).nominated = true
         getPlayerBySeatID(clock_info.nominatee).nominateed = true
@@ -435,6 +443,7 @@ socket.on('dead vote update', (seat_id) => {
     let player = getPlayerBySeatID(seat_id)
 	if (player != null) {
 		player.dead_vote = false
+        appendLog(getLogDefaultStyle(getLogPlayerStyle(player.name) + " used their dead vote"))
 	}
     reDrawDeadVotes()
     reDrawHUD()
