@@ -3,7 +3,7 @@ const local = false;
 if (local) {
 }
 else {
-	socket = io({autoConnect: false})
+	socket = io("/only_connect", {autoConnect: false})
 	socket.on("connect", () => {
 		socket.emit("init", "only_connect");
 	})

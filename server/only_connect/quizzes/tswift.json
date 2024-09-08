@@ -1,0 +1,169 @@
+{
+	"groups": [
+		{
+			"boxes": ["Guilty as Sin", "Who's Afraid of Little Old Me", "...Ready For It", "Question..."],
+			"answer": "Titles that end in ?",
+			"type": "text"
+		},
+		{
+			"boxes": ["Run", "Everything Has Changed", "End Game", "The Joker And The Queen"],
+			"answer": "Collabs with Ed Sheeran",
+			"type": "text"
+		},
+		{
+			"boxes": ["Speak Now (4th)", "Lover (3rd)", "Red (2nd)", "Fearless (1st)"],
+			"answer": "Which track is the title track",
+			"type": "text"
+		},
+		{
+			"boxes": ["assets/florida.mp3", "assets/paris.mp3", "assets/new-york.mp3", "assets/london-boy.mp3"],
+			"answer": "Songs about Places",
+			"type": "music"
+		},
+		{
+			"boxes": ["assets/electric-touch.mp3", "assets/when-emma.mp3", "assets/castles.mp3", "assets/timeless.mp3"],
+			"answer": "Songs From the Vault",
+			"type": "music"
+		},
+		{
+			"boxes": ["assets/phone.jpg", "assets/park-bench.jpg", "assets/tshirt-sneakers.jpg", "assets/i-love-you.jpg"],
+			"answer": "You Belong With Me",
+			"type": "picture"
+		}
+	],
+	"sequences": [
+		{
+			"boxes": ["Red (2012)", "1989 (2013)", "reputation (2017)", "Lover (2019)"],
+			"answer": "Year of Album Releases",
+			"type": "text"
+		},
+		{
+			"boxes": ["the 1", "willow", "Lavender Haze", "Fortnight"],
+			"answer": "First songs in Albums",
+			"type": "text"
+		},
+		{
+			"boxes": ["Salt air, and the rust on your door", "I never needed anything more", "'Whispers of 'Are you sure?''", "'Never have I ever before'"],
+			"answer": "Song lyrics in order",
+			"type": "text"
+		},
+		{
+			"boxes": ["assets/americana.mp3", "assets/fearless.mp3", "assets/22.mp3", "Enchanted"],
+			"answer": "Eras Tour First Songs",
+			"type": "music"
+		},
+		{
+			"boxes": ["assets/the-1.mp3", "assets/seven.mp3", "assets/fifteen.mp3", "22"],
+			"answer": "Number Songs in Ascending Order",
+			"type": "music"
+		},
+		{
+			"boxes": ["assets/harry-styles-eros.jpg", "assets/calvin-harris.jpg", "assets/tom-hiddleston.jpg", "assets/joe-alwyn.jpg"],
+			"answer": "Boyfriends in Order",
+			"type": "picture"
+		}
+	],
+	"connections": [
+		[
+			{
+				"boxes": ["White Horse", "Bye Bye Baby", "Forever & Always", "Breathe"],
+				"answer": "Fearless"
+			},
+			{
+				"boxes": ["The Outside", "Tim McGraw", "Our Song", "Invisible"],
+				"answer": "Debut"
+			},
+			{
+				"boxes": ["Epiphany", "Mirrorball", "My Tears Ricochet", "Perfect"],
+				"answer": "folklore"
+			},
+			{
+				"boxes": ["Ivy", "Marjorie", "Dorothea", "Gold Rush"],
+				"answer": "evermore"
+			}
+		],
+		[
+			{
+				"boxes": ["Haunted", "Innocent", "Dear John", "Sparks Fly"],
+				"answer": "Speak Now"
+			},
+			{
+				"boxes": ["Message In A Bottle", "Starlight", "Treacherous", "Stay Stay Stay"],
+				"answer": "Red"
+			},
+			{
+				"boxes": ["Maroon", "Labyrinth", "Glitch", "Dear Reader"],
+				"answer": "Midnights"
+			},
+			{
+				"boxes": ["So Long, London", "Robin", "So High School", "The Black Dog"],
+				"answer": "THE TORTURED POETS"
+			}
+		]
+	],
+	"vowels": [
+		{
+			"categoryName": "Song Titles",
+			"questions": [
+				{
+					"question": "BTD DDY LVHM",
+					"answer": "BUT DADDY I LOVE HIM"
+				},
+				{
+					"question": "WRN VRV RGTT NGBC KTG THR",
+					"answer": "WE ARE NEVER EVER GETTING BACK TOGETHER"
+				},
+				{
+					"question": "YND TCL MDWN",
+					"answer": "YOU NEED TO CALM DOWN"
+				},
+				{
+					"question": "LKW HTY MDMD",
+					"answer": "LOOK WHAT YOU MADE ME DO"
+				}
+			]
+		},
+		{
+			"categoryName": "Song Lyrics",
+			"questions": [
+				{
+					"question": "KR MSM YBYF RND",
+					"answer": "KARMA IS MY BOYFRIEND"
+				},
+				{
+					"question": "SH KTF FSH KTFF",
+					"answer": "I SHAKE IT OFF I SHAKE IT OFF"
+				},
+				{
+					"question": "FKT HPT RRC HY",
+					"answer": "FUCK THE PATRIARCHY"
+				},
+				{
+					"question": "TSC RLS MMR",
+					"answer": "IT'S A CRUEL SUMMER"
+				}
+			]
+		},
+		{
+			"categoryName": "Boyfriends",
+			"questions": [
+				{
+					"question": "JKGY LLN HL",
+					"answer": "JAKE GYLLENHAAL"
+				},
+				{
+					"question": "CL VNHR RS",
+					"answer": "CALVIN HARRIS"
+				},
+				{
+					"question": "JH NM YR",
+					"answer": "JOHN MAYER"
+				},
+				{
+					"question": "TYL RLT NR",
+					"answer": "TAYLOR LAUTNER"
+				}
+			]
+		}
+	]
+}

@@ -65,7 +65,7 @@ function stopTimer() {
     }
 }
 
-const gameQuestions = JSON.parse(fs.readFileSync("only_connect/quizzes/fun.json", "utf8"));
+const gameQuestions = JSON.parse(fs.readFileSync("only_connect/quizzes/tswift.json", "utf8"));
 // Shuffle questions
 gameQuestions["groups"] = shuffle(gameQuestions["groups"]);
 gameQuestions["sequences"] = shuffle(gameQuestions["sequences"]);
@@ -522,8 +522,9 @@ function connection(socket) {
     })
     
     socket.on("disconnect", () => {
-		console.log("[ONLY_CONNECT] SOCKET COUNT: " + io.sockets.size);
-        if (!io.sockets.size) {
+	let socketCount = socket.client.conn.server.clientsCount;
+	console.log("[ONLY_CONNECT] SOCKET COUNT: " + socketCount);
+        if (!socketCount) {
             gameState = null;
         }
     })
